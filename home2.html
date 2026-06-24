@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echelon Search | Home 2 · Executive Headhunter</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23C9A84C' d='M256 32c-14.8 0-26.7 12-26.7 26.7v26.7c0 14.7 11.9 26.7 26.7 26.7s26.7-12 26.7-26.7V58.7c0-14.7-11.9-26.7-26.7-26.7zm117.3 74.7c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zm-234.6 0c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zM256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 213.3c-47.1 0-85.3-38.2-85.3-85.3s38.2-85.3 85.3-85.3 85.3 38.2 85.3 85.3-38.2 85.3-85.3 85.3z'/></svg>">
+  <meta name="description" content="Echelon Search – Home 2: executive headhunter, leadership advisory, and talent intelligence.">
+
+  <!-- Tailwind + config (copied from reference) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'main-bg': 'var(--bg-primary)',
+            'surface-bg': 'var(--bg-secondary)',
+            'card-bg': 'var(--card-bg)',
+            'tertiary-bg': 'var(--bg-tertiary)',
+            'header-bg': 'var(--bg-header)',
+            'text-main': 'var(--text-primary)',
+            'text-sub': 'var(--text-secondary)',
+            'text-muted': 'var(--text-muted)',
+            'border-main': 'var(--border-color)',
+            'gold-accent': 'var(--gold-accent)',
+            'gold-hover': 'var(--gold-hover)',
+            'gold-light': 'var(--gold-light)',
+          },
+          fontFamily: {
+            'display': ['Inter', 'system-ui', 'sans-serif'],
+            'body': ['Inter', 'system-ui', 'sans-serif'],
+            'mono': ['JetBrains Mono', 'monospace'],
+          },
+          backgroundImage: {
+            'grid-pattern-light': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+            'grid-pattern-dark': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.9s cubic-bezier(0.2, 0.9, 0.3, 1)',
+            'pulse-gold': 'pulseGold 2.5s infinite',
+            'float-slow': 'float 8s ease-in-out infinite',
+            'spin-slow': 'spin 18s linear infinite',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(40px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            pulseGold: {
+              '0%, 100%': { opacity: '0.6' },
+              '50%': { opacity: '1' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts + Font Awesome 6 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Global styles (exact copy from reference to keep theme) -->
+  <style>
+    :root {
+      --bg-primary: #FAF9F6;
+      --bg-secondary: #FFFFFF;
+      --bg-tertiary: #F3F1EC;
+      --bg-header: rgba(250, 249, 246, 0.95);
+      --text-primary: #1C1A17;
+      --text-secondary: #4A453F;
+      --text-muted: #8A8276;
+      --border-color: #EAE6DF;
+      --gold-accent: #B58A3D;
+      --gold-hover: #9E742F;
+      --gold-light: rgba(181, 138, 61, 0.1);
+      --card-bg: #FFFFFF;
+      --card-border: #EAE6DF;
+      --card-shadow: 0 10px 30px rgba(28, 26, 23, 0.04);
+      --nav-item-color: #4A453F;
+    }
+    .dark {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #121212;
+      --bg-tertiary: #1E1E1E;
+      --bg-header: rgba(10, 10, 10, 0.95);
+      --text-primary: #E8E8E8;
+      --text-secondary: #A0A0A0;
+      --text-muted: #6B6B6B;
+      --border-color: #2C2C2C;
+      --gold-accent: #C9A84C;
+      --gold-hover: #D6B95A;
+      --gold-light: rgba(201, 168, 76, 0.1);
+      --card-bg: #121212;
+      --card-border: #2C2C2C;
+      --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      --nav-item-color: #E8E8E8;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background:var(--gold-accent); border-radius:8px; }
+
+    .nav-item {
+      position:relative;
+      font-weight:500;
+      font-size:0.82rem;
+      letter-spacing:0.01em;
+      color:var(--nav-item-color);
+      transition:color 0.2s;
+      padding:0.5rem 0;
+      opacity:0.85;
+      cursor:pointer;
+      background:transparent;
+      border:none;
+    }
+    @media (min-width: 1440px) {
+      .nav-item {
+        font-size: 0.9rem;
+        letter-spacing: 0.02em;
+      }
+    }
+    .nav-item:hover { color:var(--gold-accent); opacity:1; }
+    .nav-item::after {
+      content:'';
+      position:absolute;
+      bottom:0; left:0;
+      width:0; height:2px;
+      background:var(--gold-accent);
+      transition:width 0.25s ease;
+    }
+    .nav-item:hover::after { width:100%; }
+
+    .dropdown { position:relative; }
+    .dropdown-menu {
+      position:absolute;
+      top:100%; left:0;
+      min-width:220px;
+      background:var(--bg-secondary);
+      border:1px solid var(--border-color);
+      border-radius:8px;
+      padding:0.5rem 0;
+      box-shadow:var(--card-shadow);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(6px);
+      transition:all 0.25s ease;
+      z-index:1000;
+    }
+    .dropdown:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
+    .dropdown-item {
+      display:flex;
+      align-items:center;
+      padding:0.65rem 1.5rem;
+      color:var(--text-primary);
+      font-weight:400;
+      font-size:0.9rem;
+      transition:all 0.2s;
+      text-decoration:none;
+    }
+    .dropdown-item:hover { background:var(--bg-tertiary); color:var(--gold-accent); padding-left:1.75rem; }
+    .dropdown-item i { margin-right:0.75rem; width:20px; color:var(--gold-accent); font-size:0.9rem; }
+
+    .auth-btn {
+      padding:0.5rem 1.1rem;
+      border-radius:6px;
+      font-weight:500;
+      font-size:0.82rem;
+      transition:all 0.3s;
+      letter-spacing:0.2px;
+      text-decoration:none;
+      display:inline-block;
+    }
+    @media (min-width: 1440px) {
+      .auth-btn {
+        padding: 0.5rem 1.6rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.3px;
+      }
+    }
+    .auth-btn.login { background:transparent; border:1px solid var(--gold-accent); color:var(--gold-accent); }
+    .auth-btn.login:hover { background:var(--gold-accent); color:var(--bg-primary); }
+    .auth-btn.signup { background:var(--gold-accent); color:var(--bg-primary); border:none; }
+    .auth-btn.signup:hover { background:var(--gold-hover); transform:translateY(-2px); box-shadow:0 8px 20px var(--gold-light); }
+
+    .toggle-btn {
+      width:36px; height:36px;
+      border-radius:6px;
+      background:var(--bg-tertiary);
+      color:var(--text-primary);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all 0.2s;
+      border:1px solid var(--border-color);
+    }
+    .toggle-btn:hover { background:var(--gold-accent); color:var(--bg-primary); border-color:var(--gold-accent); }
+
+    .mobile-menu {
+      background:var(--bg-secondary);
+      border-top:1px solid var(--border-color);
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.4s ease;
+    }
+    .mobile-menu.open { max-height:90vh; overflow-y:auto; }
+    .mobile-menu-item {
+      display:block;
+      padding:1rem 1.5rem;
+      border-bottom:1px solid var(--border-color);
+      color:var(--text-primary);
+      font-weight:400;
+      text-decoration:none;
+    }
+    .mobile-dropdown-content {
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.3s;
+      background:var(--bg-primary);
+    }
+    .mobile-dropdown-content.show { max-height:250px; }
+    .mobile-auth-btn {
+      padding:0.8rem;
+      font-weight:500;
+      border-radius:6px;
+      text-align:center;
+      text-decoration:none;
+      display:block;
+    }
+    .mobile-auth-btn.login { border:1px solid var(--gold-accent); color:var(--gold-accent); }
+    .mobile-auth-btn.signup { background:var(--gold-accent); color:var(--bg-primary); }
+
+    .stat-card {
+      background:var(--card-bg);
+      border:1px solid var(--card-border);
+      border-radius:12px;
+      padding:1.5rem;
+      transition:all 0.3s;
+      box-shadow:var(--card-shadow);
+    }
+    .stat-card:hover { border-color:var(--gold-accent); transform:translateY(-4px); box-shadow:0 12px 30px rgba(181,138,61,0.15); }
+
+    .btn-primary {
+      background:var(--gold-accent);
+      color:var(--bg-primary);
+      padding:0.8rem 2rem;
+      font-weight:600;
+      border-radius:8px;
+      transition:all 0.3s;
+      border:none;
+      cursor:pointer;
+    }
+    .btn-primary:hover { background:var(--gold-hover); transform:translateY(-2px); box-shadow:0 8px 25px var(--gold-light); }
+    .btn-outline {
+      border:1px solid var(--gold-accent);
+      color:var(--gold-accent);
+      padding:0.8rem 2rem;
+      font-weight:500;
+      border-radius:8px;
+      transition:all 0.3s;
+      background:transparent;
+      cursor:pointer;
+    }
+    .btn-outline:hover { background:var(--gold-accent); color:var(--bg-primary); }
+
+    .footer-heading { border-left:3px solid var(--gold-accent); padding-left:0.75rem; display:inline-block; font-weight:600; }
+    .social-icon {
+      width:38px; height:38px;
+      background:var(--bg-tertiary);
+      border:1px solid var(--border-color);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+      transition:all 0.3s;
+      color:var(--text-primary);
+      text-decoration:none;
+    }
+    .social-icon:hover { background:var(--gold-accent); color:var(--bg-primary); transform:translateY(-3px); }
+
+    [dir="rtl"] .dropdown-menu { left:auto; right:0; }
+    [dir="rtl"] .dropdown-item i { margin-right:0; margin-left:0.75rem; }
+    [dir="rtl"] .footer-heading { border-left:none; border-right:3px solid #C9A84C; padding-left:0; padding-right:0.75rem; }
+    [dir="rtl"] .ml-8 { margin-left:0; margin-right:2rem; }
+    [dir="rtl"] .ml-4 { margin-left:0; margin-right:1rem; }
+    [dir="rtl"] .mr-2 { margin-right:0; margin-left:0.5rem; }
+  </style>
+</head>
+<body class="bg-main-bg text-text-main transition-colors duration-300">
+
+<!-- ========== HEADER (exact copy from reference) ========== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-header-bg backdrop-blur-sm border-b border-border-main transition-colors duration-300">
+  <div class="container mx-auto px-6">
+    <div class="flex items-center justify-between h-20">
+      <a href="index.html" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300">
+          <i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i>
+        </div>
+        <div>
+          <span class="text-2xl font-display font-extrabold tracking-tight text-text-main transition-colors duration-300">Echelon</span>
+          <span class="text-gold-accent font-display font-light ml-1 text-sm transition-colors duration-300">Search</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden xl:flex items-center">
+        <div class="flex items-center gap-4 xl:gap-5 2xl:gap-7">
+          <div class="dropdown">
+            <button class="nav-item flex items-center gap-1">Home <i class="fas fa-chevron-down text-[9px]"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html" class="dropdown-item">Home 1</a>
+              <a href="home2.html" class="dropdown-item">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-item">About</a>
+          <a href="service.html" class="nav-item">Services</a>
+          <a href="practices.html" class="nav-item">Practices</a>
+          <a href="candidate.html" class="nav-item">Candidates</a>
+          <a href="insights.html" class="nav-item">Insights</a>
+          <a href="contact.html" class="nav-item">Contact</a>
+          <div class="dropdown">
+            <button class="nav-item flex items-center gap-1">Dashboard <i class="fas fa-chevron-down text-[9px]"></i></button>
+            <div class="dropdown-menu">
+              <a href="client.html" class="dropdown-item">Client</a>
+              <a href="admin.html" class="dropdown-item">Admin</a>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 ml-4 2xl:ml-8">
+          <a href="login.html" class="auth-btn login">Log In</a>
+          <a href="signup.html" class="auth-btn signup">Sign Up</a>
+        </div>
+        <div class="flex gap-2 ml-3 2xl:ml-4 desktop-toggle-group">
+          <button id="theme-toggle" class="toggle-btn" title="Theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+          <button id="rtl-toggle" class="toggle-btn" title="RTL">⇄</button>
+        </div>
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button id="mobile-toggle" class="xl:hidden text-text-main p-2 text-2xl bg-transparent border-none cursor-pointer transition-colors duration-300">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu xl:hidden">
+      <div class="mobile-dropdown">
+        <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item bg-transparent border-none cursor-pointer text-left">
+          Home <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="mobile-dropdown-content">
+          <a href="index.html" class="block px-8 py-2 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">Home 1</a>
+          <a href="home2.html" class="block px-8 py-2 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">Home 2</a>
+        </div>
+      </div>
+      <a href="about.html" class="mobile-menu-item">About</a>
+      <a href="service.html" class="mobile-menu-item">Services</a>
+      <a href="candidate.html" class="mobile-menu-item">Candidates</a>
+      <a href="insights.html" class="mobile-menu-item">Insights</a>
+      <a href="practices.html" class="mobile-menu-item">Practices</a>
+      <a href="contact.html" class="mobile-menu-item">Contact</a>
+      <div class="mobile-dropdown">
+        <button class="mobile-dropdown-btn flex justify-between w-full mobile-menu-item bg-transparent border-none cursor-pointer text-left">
+          Dashboard <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="mobile-dropdown-content">
+          <a href="client.html" class="block px-8 py-3 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">
+            Client 
+          </a>
+          <a href="admin.html" class="block px-8 py-3 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">
+            Admin
+          </a>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 p-6">
+        <a href="login.html" class="mobile-auth-btn login">Log In</a>
+        <a href="signup.html" class="mobile-auth-btn signup">Sign Up</a>
+      </div>
+      <div class="flex justify-center gap-3 p-6 border-t border-border-main">
+        <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+        <button id="rtl-toggle-mobile" class="toggle-btn">⇄</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HOME 2 HERO – DIFFERENT LAYOUT ========== -->
+<section class="relative pt-40 pb-20 lg:pt-48 lg:pb-28 bg-main-bg overflow-hidden transition-colors duration-300">
+  <!-- decorative grid + glow -->
+  <div class="absolute inset-0 bg-grid-pattern-light dark:bg-grid-pattern-dark opacity-50 pointer-events-none"></div>
+  <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-gold-accent/10 rounded-full blur-[140px] pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gold-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <!-- left: badge + title + description + cta -->
+      <div class="lg:col-span-7 space-y-6 animate-fade-up">
+        <div class="inline-block bg-gold-light px-4 py-2 rounded-full border border-gold-accent/30">
+          <span class="text-gold-accent font-mono text-xs tracking-widest uppercase">Home 2 · Executive Intelligence</span>
+        </div>
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-display font-extrabold leading-tight text-text-main">
+          <span class="text-gold-accent">Precision</span> in<br>Leadership
+        </h1>
+        <p class="text-lg text-text-sub max-w-lg font-light leading-relaxed">
+          Beyond traditional search – a strategic partnership that identifies, engages, and secures transformative C-suite talent.
+        </p>
+        <div class="flex flex-wrap gap-4 pt-2">
+          <button class="btn-primary flex items-center gap-2 group">
+            <span>Explore talent</span>
+            <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+          </button>
+          <button class="btn-outline flex items-center gap-2">
+            <i class="fas fa-play-circle"></i> Watch overview
+          </button>
+        </div>
+        <!-- trust badges -->
+        <div class="flex items-center gap-6 pt-4 text-text-muted text-sm">
+          <span><i class="fas fa-check-circle text-gold-accent mr-1"></i> 98% retention</span>
+          <span><i class="fas fa-check-circle text-gold-accent mr-1"></i> 4.8d avg fill</span>
+          <span><i class="fas fa-check-circle text-gold-accent mr-1"></i> 12k+ network</span>
+        </div>
+      </div>
+
+      <!-- right: circular dashboard / visual (different from reference) -->
+      <div class="lg:col-span-5 relative flex justify-center lg:justify-center animate-fade-up">
+        <div class="relative w-full max-w-[420px] aspect-square">
+          <!-- outer ring -->
+          <div class="absolute inset-0 rounded-full border-[3px] border-gold-accent/30 animate-spin-slow"></div>
+          <div class="absolute inset-[12%] rounded-full border-[2px] border-border-main bg-surface-bg/40 backdrop-blur-sm shadow-xl flex flex-col items-center justify-center p-6">
+            <div class="text-center">
+              <span class="text-5xl font-display font-black text-gold-accent">94%</span>
+              <p class="text-text-sub text-sm font-medium tracking-wide">placement success</p>
+              <div class="w-16 h-1 bg-gold-accent/30 mx-auto my-3 rounded-full"></div>
+              <div class="flex justify-center gap-6 text-xs font-mono text-text-muted">
+                <div><span class="block text-gold-accent font-bold">312</span> placed</div>
+                <div><span class="block text-gold-accent font-bold">1.2k</span> screened</div>
+              </div>
+            </div>
+          </div>
+          <!-- floating badges around ring -->
+          <div class="absolute -top-4 -right-4 bg-card-bg border border-border-main rounded-xl px-4 py-2 shadow-lg flex items-center gap-2">
+            <i class="fas fa-user-tie text-gold-accent"></i>
+            <span class="text-xs font-semibold">C-Suite</span>
+          </div>
+          <div class="absolute -bottom-4 -left-4 bg-card-bg border border-border-main rounded-xl px-4 py-2 shadow-lg flex items-center gap-2">
+            <i class="fas fa-rocket text-gold-accent"></i>
+            <span class="text-xs font-semibold">scale-up</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DIFFERENT: QUICK STATS BANNER ========== -->
+<section class="py-10 bg-surface-bg border-y border-border-main transition-colors duration-300">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="stat-card"><span class="block text-3xl font-bold text-gold-accent">2002</span><span class="text-xs text-text-muted">founded</span></div>
+      <div class="stat-card"><span class="block text-3xl font-bold text-gold-accent">87%</span><span class="text-xs text-text-muted">diversity slate</span></div>
+      <div class="stat-card"><span class="block text-3xl font-bold text-gold-accent">4.2</span><span class="text-xs text-text-muted">avg interviews</span></div>
+      <div class="stat-card"><span class="block text-3xl font-bold text-gold-accent">63%</span><span class="text-xs text-text-muted">offer accept</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICES / VALUE PROPS (different cards) ========== -->
+<section class="py-20 bg-main-bg transition-colors duration-300">
+  <div class="container mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-gold-accent font-mono text-xs tracking-widest uppercase">how we lead</span>
+      <h2 class="text-4xl font-display font-bold text-text-main mt-2">Executive <span class="text-gold-accent">Search</span> Reimagined</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-card-bg border border-border-main rounded-2xl p-8 shadow-sm hover:shadow-lg hover:border-gold-accent/40 transition-all group">
+        <div class="w-14 h-14 rounded-xl bg-gold-light flex items-center justify-center text-gold-accent text-2xl mb-5 group-hover:scale-110 transition">🔍</div>
+        <h3 class="text-xl font-display font-bold text-text-main">Intelligence-led</h3>
+        <p class="text-text-sub text-sm mt-2 font-light leading-relaxed">Proprietary data models map hidden talent pools beyond traditional networks.</p>
+      </div>
+      <div class="bg-card-bg border border-border-main rounded-2xl p-8 shadow-sm hover:shadow-lg hover:border-gold-accent/40 transition-all group">
+        <div class="w-14 h-14 rounded-xl bg-gold-light flex items-center justify-center text-gold-accent text-2xl mb-5 group-hover:scale-110 transition">🤝</div>
+        <h3 class="text-xl font-display font-bold text-text-main">Board-level advisory</h3>
+        <p class="text-text-sub text-sm mt-2 font-light leading-relaxed">Strategic counsel on succession, diversity, and governance for the most demanding boards.</p>
+      </div>
+      <div class="bg-card-bg border border-border-main rounded-2xl p-8 shadow-sm hover:shadow-lg hover:border-gold-accent/40 transition-all group">
+        <div class="w-14 h-14 rounded-xl bg-gold-light flex items-center justify-center text-gold-accent text-2xl mb-5 group-hover:scale-110 transition">⚡</div>
+        <h3 class="text-xl font-display font-bold text-text-main">Accelerated timelines</h3>
+        <p class="text-text-sub text-sm mt-2 font-light leading-relaxed">Average 4.8 days to shortlist, backed by deep sector intelligence and proactive outreach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIAL / QUOTE (different element) ========== -->
+<section class="py-16 bg-surface-bg border-y border-border-main transition-colors duration-300">
+  <div class="container mx-auto px-6 max-w-4xl text-center">
+    <i class="fas fa-quote-left text-5xl text-gold-accent/20 mb-4"></i>
+    <blockquote class="text-2xl md:text-3xl font-display font-light italic text-text-main leading-relaxed">
+      “Echelon Search delivered a shortlist of candidates that redefined our expectations. Their intelligence-led approach is unmatched.”
+    </blockquote>
+    <div class="mt-6 flex items-center justify-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-gold-accent/20 flex items-center justify-center text-gold-accent font-bold">AK</div>
+      <div class="text-left">
+        <div class="font-semibold text-text-main">Amara Khanna</div>
+        <div class="text-xs text-text-muted">CEO, Nexus Health</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LATEST INSIGHTS / CARDS (different style) ========== -->
+<section class="py-20 bg-main-bg transition-colors duration-300">
+  <div class="container mx-auto px-6">
+    <div class="flex justify-between items-end mb-12">
+      <div>
+        <span class="text-gold-accent font-mono text-xs tracking-widest uppercase">Insights</span>
+        <h2 class="text-3xl font-display font-bold text-text-main mt-1">Talent <span class="text-gold-accent">Intelligence</span></h2>
+      </div>
+      <a href="#" class="text-gold-accent hover:text-gold-hover text-sm font-medium flex items-center gap-1">View all <i class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      
+      <!-- Card 1 -->
+      <div class="bg-card-bg border border-border-main rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+        <div class="relative overflow-hidden aspect-[16/10] bg-tertiary-bg">
+          <img src="assets/ceo_trends.png" alt="Office lobby succession context" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono text-gold-accent uppercase tracking-wider block mb-1">Report</span>
+            <h4 class="text-lg font-bold text-text-main mt-1 group-hover:text-gold-accent transition">CEO succession trends</h4>
+            <p class="text-text-sub text-sm mt-2 font-light leading-relaxed">Analysis of boardroom turnover and emerging leadership profiles in 2026.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-card-bg border border-border-main rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+        <div class="relative overflow-hidden aspect-[16/10] bg-tertiary-bg">
+          <img src="assets/tech_talent.png" alt="Tech executive working on laptop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono text-gold-accent uppercase tracking-wider block mb-1">deep tech</span>
+            <h4 class="text-lg font-bold text-text-main mt-1 group-hover:text-gold-accent transition">AI talent scarcity</h4>
+            <p class="text-text-sub text-sm mt-2 font-light leading-relaxed">How generative AI is reshaping executive search and engineering leadership.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-card-bg border border-border-main rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col h-full">
+        <div class="relative overflow-hidden aspect-[16/10] bg-tertiary-bg">
+          <img src="assets/board_composition.png" alt="Boardroom empty conference table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-mono text-gold-accent uppercase tracking-wider block mb-1">governance</span>
+            <h4 class="text-lg font-bold text-text-main mt-1 group-hover:text-gold-accent transition">ESG & board composition</h4>
+            <p class="text-text-sub text-sm mt-2 font-light leading-relaxed">Diversity mandates and the evolving expectations of institutional investors.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL CALL TO ACTION (SUBSCRIBE BANNER) ========== -->
+<section class="py-16 bg-gold-accent text-white transition-colors duration-300 relative">
+    <div class="container mx-auto px-6 text-center max-w-4xl">
+        <h2 class="text-3xl md:text-4xl font-display font-extrabold tracking-tight dark:text-main-bg transition-colors duration-300">
+            Join Echelon Insights ⚡
+        </h2>
+        <p class="text-base md:text-lg mt-3 font-light leading-relaxed max-w-2xl mx-auto opacity-90 dark:text-main-bg transition-colors duration-300">
+            Get confidential executive briefings, industry succession guides, and talent intelligence reports.
+        </p>
+        
+        <form class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+            <input type="email" placeholder="Your email address" class="bg-white text-gray-950 placeholder-gray-400 rounded-full px-6 py-3.5 w-full sm:w-80 md:w-96 focus:outline-none focus:ring-2 focus:ring-white/50 shadow-sm transition-all text-center sm:text-left" required>
+            <button type="submit" class="bg-white hover:bg-gray-100 text-gold-accent dark:bg-main-bg dark:text-gold-accent dark:hover:bg-opacity-95 font-semibold rounded-full px-8 py-3.5 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-white/50 whitespace-nowrap">
+                Subscribe
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- ========== FOOTER (exact copy from reference) ========== -->
+<footer class="pt-16 pb-8 bg-main-bg border-t border-border-main transition-colors duration-300">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div class="text-center md:text-left">
+        <div class="flex items-center gap-3 mb-6 justify-center md:justify-start">
+          <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300"><i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i></div>
+          <span class="text-2xl font-display font-extrabold text-text-main transition-colors duration-300">Echelon</span><span class="text-gold-accent font-display text-sm transition-colors duration-300">Search</span>
+        </div>
+        <p class="text-text-sub/70 font-light leading-relaxed max-w-xs mx-auto md:mx-0">Global executive search · Leadership advisory since 2002.</p>
+        <div class="flex gap-3 mt-6 justify-center md:justify-start">
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="text-center md:text-left">
+        <h3 class="text-text-main text-xl font-display font-bold mb-5 footer-heading">Practices</h3>
+        <ul class="space-y-3 font-light text-text-sub/80">
+          <li><a href="practices.html" class="hover:text-gold-accent transition block">C-Suite & Board</a></li>
+          <li><a href="practices.html" class="hover:text-gold-accent transition block">Tech & Digital</a></li>
+          <li><a href="practices.html" class="hover:text-gold-accent transition block">Healthcare & Life Sci</a></li>
+          <li><a href="practices.html" class="hover:text-gold-accent transition block">Private Equity</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-left">
+        <h3 class="text-text-main text-xl font-display font-bold mb-5 footer-heading">Insights</h3>
+        <ul class="space-y-3 font-light text-text-sub/80">
+          <li><a href="insights.html" class="hover:text-gold-accent transition block">Talent Intelligence</a></li>
+          <li><a href="insights.html" class="hover:text-gold-accent transition block">Market Reports</a></li>
+          <li><a href="insights.html" class="hover:text-gold-accent transition block">Diversity & Inclusion</a></li>
+          <li><a href="insights.html" class="hover:text-gold-accent transition block">Webinars</a></li>
+        </ul>
+      </div>
+      <div class="text-center md:text-left">
+        <h3 class="text-text-main text-xl font-display font-bold mb-5 footer-heading">Connect</h3>
+        <ul class="space-y-3 font-light text-text-sub/80">
+          <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-gold-accent w-5"></i><span>1 Embarcadero, SF, CA</span></li>
+          <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-phone text-gold-accent w-5"></i><span>+1 (888) 567-2002</span></li>
+          <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-envelope text-gold-accent w-5"></i><span>secure@echelon.com</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-border-main mt-12 pt-8 text-center text-text-muted text-sm font-light">
+      <p>© 2026 Echelon Search. Confidential & Secure. All rights reserved.</p>
+      <p class="mt-1">Certified by the Association of Executive Search Consultants</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== SCRIPTS (exact copy from reference) ========== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Theme Toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const themeBtnMob = document.getElementById('theme-toggle-mobile');
+
+    function updateThemeUI(isDark) {
+      [themeBtn, themeBtnMob].forEach(function(b) {
+        if (b) {
+          var moon = b.querySelector('.fa-moon');
+          var sun = b.querySelector('.fa-sun');
+          if (moon && sun) {
+            if (isDark) { moon.classList.add('hidden'); sun.classList.remove('hidden'); }
+            else { moon.classList.remove('hidden'); sun.classList.add('hidden'); }
+          }
+        }
+      });
+    }
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      var isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeUI(isDark);
+    }
+
+    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+    if (themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+
+    var cachedTheme = localStorage.getItem('theme');
+    var isDark = cachedTheme === 'dark' || cachedTheme === null;
+    if (isDark) { document.documentElement.classList.add('dark'); updateThemeUI(true); }
+    else { document.documentElement.classList.remove('dark'); updateThemeUI(false); }
+
+    // RTL Toggle
+    var rtlBtn = document.getElementById('rtl-toggle');
+    var rtlMob = document.getElementById('rtl-toggle-mobile');
+
+    function updateRtlUI(isRtl) {
+      document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+      document.documentElement.lang = isRtl ? 'ar' : 'en';
+      [rtlBtn, rtlMob].forEach(function(b) { if (b) b.classList.toggle('active', isRtl); });
+    }
+
+    function toggleRtl() {
+      var isRtl = document.documentElement.dir !== 'rtl';
+      localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr');
+      updateRtlUI(isRtl);
+    }
+
+    if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+    if (rtlMob) rtlMob.addEventListener('click', toggleRtl);
+
+    if (localStorage.getItem('dir') === 'rtl') updateRtlUI(true);
+
+    // Mobile Menu
+    var mobileToggle = document.getElementById('mobile-toggle');
+    var mobileMenu = document.getElementById('mobile-menu');
+    var icon = mobileToggle ? mobileToggle.querySelector('i') : null;
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function() {
+        mobileMenu.classList.toggle('open');
+        if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+      });
+    }
+
+    
+        // Active Navigation Highlighting
+        (function() {
+            var style = document.createElement('style');
+            style.textContent = `
+                .nav-item.active {
+                    color: var(--gold-accent) !important;
+                    opacity: 1 !important;
+                }
+                .nav-item.active::after {
+                    width: 100% !important;
+                }
+                .mobile-menu-item.active {
+                    color: var(--gold-accent) !important;
+                    font-weight: 600 !important;
+                }
+                .mobile-dropdown-btn.active {
+                    color: var(--gold-accent) !important;
+                }
+                .dropdown-item.active {
+                    background: var(--bg-tertiary) !important;
+                    color: var(--gold-accent) !important;
+                }
+            `;
+            document.head.appendChild(style);
+
+            var pathname = window.location.pathname.split('/').pop() || 'index.html';
+
+            // 1. Desktop primary links
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                }
+            });
+
+            // 2. Desktop dropdown sub-links
+            document.querySelectorAll('.dropdown-menu .dropdown-item').forEach(function(item) {
+                // Reset any hardcoded inline active styles from copy-pastes
+                item.style.background = '';
+                item.style.color = '';
+                
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                    var parentDropdown = item.closest('.dropdown');
+                    if (parentDropdown) {
+                        var btn = parentDropdown.querySelector('.nav-item');
+                        if (btn) btn.classList.add('active');
+                    }
+                }
+            });
+
+            // 3. Mobile primary links
+            document.querySelectorAll('.mobile-menu-item').forEach(function(item) {
+                // Reset hardcoded inline active styles
+                item.style.color = '';
+                
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                }
+            });
+
+            // 4. Mobile dropdown sub-links
+            document.querySelectorAll('.mobile-dropdown-content a').forEach(function(item) {
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                    var parentDropdown = item.closest('.mobile-dropdown');
+                    if (parentDropdown) {
+                        var btn = parentDropdown.querySelector('.mobile-dropdown-btn');
+                        if (btn) btn.classList.add('active');
+                    }
+                }
+            });
+        })();
+
+        var dropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+    dropdownBtns.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        var content = btn.nextElementSibling;
+        if (content) {
+          content.classList.toggle('show');
+          var icon = btn.querySelector('.fa-chevron-down');
+          if (icon) { icon.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)'; }
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

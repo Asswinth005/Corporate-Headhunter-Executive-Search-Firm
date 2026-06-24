@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Echelon Search</title>
+    <!-- Custom Favicon - Echelon Search Gold -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23C9A84C' d='M256 32c-14.8 0-26.7 12-26.7 26.7v26.7c0 14.7 11.9 26.7 26.7 26.7s26.7-12 26.7-26.7V58.7c0-14.7-11.9-26.7-26.7-26.7zm117.3 74.7c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zm-234.6 0c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zM256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 213.3c-47.1 0-85.3-38.2-85.3-85.3s38.2-85.3 85.3-85.3 85.3 38.2 85.3 85.3-38.2 85.3-85.3 85.3z'/%3E%3C/svg%3E">
+    <meta name="description"
+        content="Oops! The page you're looking for is out of reach. Let's get you back on track with Echelon Search's executive intelligence.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'es-gold': '#C9A84C',
+                        'es-gold-dark': '#B58A3D',
+                        'es-gold-bright': '#D6B95A',
+                        'es-charcoal': '#1C1A17',
+                        'es-slate': '#2E2A24',
+                        'es-light': '#FAF9F6',
+                        'es-card': '#FFFFFF',
+                        'dark-bg': '#0A0A0A',
+                        'dark-card': '#121212',
+                        'dark-surface': '#1E1E1E',
+                        'es-muted': '#8A8276',
+                        'es-border': '#EAE6DF',
+                        'main-bg': 'var(--bg-primary)',
+                        'surface-bg': 'var(--bg-secondary)',
+                        'card-bg': 'var(--bg-secondary)',
+                        'tertiary-bg': 'var(--bg-tertiary)',
+                        'text-main': 'var(--text-primary)',
+                        'text-sub': 'var(--text-secondary)',
+                        'text-muted': 'var(--text-muted)',
+                        'border-main': 'var(--border-color)',
+                        'gold-accent': 'var(--gold-accent)',
+                    },
+                    fontFamily: {
+                        'display': ['Inter', 'system-ui', 'sans-serif'],
+                        'body': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'es-pattern': "radial-gradient(circle at 20% 30%, rgba(201,168,76,0.05) 0%, transparent 60%)",
+                    },
+                    animation: {
+                        'spin-slow': 'spinSlow 12s linear infinite',
+                        'es-pulse': 'esPulse 2s ease-in-out infinite',
+                        'float-gentle': 'floatGentle 4s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out',
+                        'pulse-gentle': 'pulseGentle 2s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        spinSlow: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        esPulse: {
+                            '0%,100%': { opacity: '0.6', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.05)' },
+                        },
+                        floatGentle: {
+                            '0%,100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseGentle: {
+                            '0%,100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        },
+                        shimmer: {
+                            '0%,100%': { textShadow: '0 0 0px rgba(201,168,76,0)' },
+                            '50%': { textShadow: '0 0 20px rgba(201,168,76,0.5)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F3F1EC;
+            --text-primary: #1C1A17;
+            --text-secondary: #4A453F;
+            --text-muted: #8A8276;
+            --border-color: #EAE6DF;
+            --gold-accent: #B58A3D;
+            --gold-light: rgba(181, 138, 61, 0.1);
+            --card-shadow: 0 10px 30px rgba(28, 26, 23, 0.04);
+        }
+
+        .dark {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1E1E1E;
+            --text-primary: #E8E8E8;
+            --text-secondary: #A0A0A0;
+            --text-muted: #6B6B6B;
+            --border-color: #2C2C2C;
+            --gold-accent: #C9A84C;
+            --gold-light: rgba(201, 168, 76, 0.1);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .dark body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* Toggle Buttons */
+        .toggle-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: #FFFFFF;
+            color: #1C1A17;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(201,168,76,0.3);
+            font-size: 1.1rem;
+        }
+
+        .dark .toggle-btn {
+            background: #121212;
+            color: #C9A84C;
+            border-color: rgba(201,168,76,0.4);
+        }
+
+        .toggle-btn:hover {
+            background: #C9A84C;
+            color: #FAF9F6;
+        }
+
+        .dark .toggle-btn:hover {
+            background: #C9A84C;
+            color: #0A0A0A;
+        }
+
+        .toggle-btn.active {
+            background: #C9A84C;
+            color: #FAF9F6;
+        }
+
+        .dark .toggle-btn.active {
+            background: #D6B95A;
+            color: #0A0A0A;
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background: #C9A84C;
+            color: #1C1A17;
+            padding: 0.85rem 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(201,168,76,0.35);
+            font-family: 'Inter', sans-serif;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #B58A3D;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201,168,76,0.45);
+        }
+
+        .dark .btn-primary {
+            background: #D6B95A;
+            color: #0A0A0A;
+        }
+
+        .dark .btn-primary:hover {
+            background: #C9A84C;
+        }
+
+        .btn-secondary {
+            border: 1.5px solid #C9A84C;
+            background: transparent;
+            color: #C9A84C;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+
+        .dark .btn-secondary {
+            border-color: #D6B95A;
+            color: #D6B95A;
+        }
+
+        .btn-secondary:hover {
+            background: #C9A84C;
+            color: #FAF9F6;
+            transform: translateY(-2px);
+        }
+
+        .dark .btn-secondary:hover {
+            background: #D6B95A;
+            color: #0A0A0A;
+        }
+
+        /* Accent line */
+        .gold-line {
+            width: 70px;
+            height: 3px;
+            background: #C9A84C;
+            margin: 1rem auto;
+            border-radius: 3px;
+        }
+
+        .dark .gold-line {
+            background: #D6B95A;
+        }
+
+        /* Animated element */
+        .floating-icon {
+            animation: floatGentle 4s ease-in-out infinite;
+        }
+
+        /* Pulse animation */
+        .icon-animation i {
+            animation: esPulse 2s ease-in-out infinite;
+        }
+
+        /* RTL Fixes */
+        [dir="rtl"] .space-x-3> :not([hidden])~ :not([hidden]) {
+            --tw-space-x-reverse: 1;
+            margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+            margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+        }
+
+        [dir="rtl"] .ml-8 {
+            margin-left: 0;
+            margin-right: 2rem;
+        }
+
+        [dir="rtl"] .mr-2 {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+
+        [dir="rtl"] .gold-line {
+            margin: 1rem auto;
+        }
+
+        /* Shimmer text */
+        .shimmer-text {
+            animation: shimmer 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="es-pattern">
+
+    <!-- ========== HEADER ========== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-dark-bg/95 backdrop-blur-md border-b border-es-gold/20 shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20 md:h-24 py-3 md:py-0">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300">
+                        <i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-sans font-extrabold tracking-tight text-text-main transition-colors duration-300">Echelon</span>
+                        <span class="text-gold-accent font-sans font-light ml-1 text-sm transition-colors duration-300">Search</span>
+                    </div>
+                </a>
+
+                <!-- Toggle Buttons Only -->
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" class="toggle-btn" title="Dark / Light">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                    <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
+                        ⇄
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== 404 MAIN CONTENT ========== -->
+    <div class="min-h-screen flex items-center justify-center pt-32 pb-20 px-6">
+        <div class="max-w-2xl mx-auto text-center animate-fade-in-up">
+            <!-- Animated Icon -->
+            <div class="mb-6 floating-icon">
+                <div class="w-28 h-28 md:w-36 md:h-36 rounded-full border-8 border-es-gold/20 flex items-center justify-center mx-auto relative icon-animation">
+                    <i class="fas fa-compass text-es-gold dark:text-es-gold-bright text-5xl md:text-6xl animate-pulse-gentle"></i>
+                    <div class="absolute inset-0 rounded-full border-4 border-es-gold/30 animate-ping opacity-75"></div>
+                    <i class="fas fa-circle-exclamation text-es-gold-dark dark:text-es-gold absolute -top-2 -right-2 text-xl animate-pulse"></i>
+                </div>
+            </div>
+
+            <!-- Large 404 Number -->
+            <div class="mb-4">
+                <span class="text-[120px] md:text-[180px] font-display font-medium text-es-gold dark:text-es-gold-bright leading-none tracking-tighter drop-shadow-lg shimmer-text">404</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-2xl md:text-3xl font-display font-bold text-es-charcoal dark:text-white mb-3">
+                Executive Search Interrupted
+            </h1>
+
+            <!-- Divider -->
+            <div class="gold-line"></div>
+
+            <!-- Message -->
+            <p class="text-base md:text-lg text-es-charcoal/70 dark:text-gray-300 mb-8 leading-relaxed max-w-md mx-auto">
+                The leadership intelligence you're seeking has moved or is under confidential review. Let's navigate you back to the right path.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap gap-4 justify-center mb-12">
+                <a href="index.html" class="btn-primary">
+                    <i class="fas fa-home mr-1"></i> Back to Home
+                </a>
+                <a href="practices.html" class="btn-secondary">
+                    <i class="fas fa-layer-group mr-1"></i> View Practices
+                </a>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="border-t border-es-gold/20 pt-8">
+                <p class="text-sm text-es-charcoal/60 dark:text-gray-400 mb-4">
+                    <i class="fas fa-route text-es-gold mr-2"></i> Quick Navigation — Find Your Path
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <a href="about.html" class="text-sm font-medium text-es-charcoal/70 dark:text-gray-300 hover:text-es-gold dark:hover:text-es-gold-bright transition">About</a>
+                    <span class="text-es-gold/30">•</span>
+                    <a href="candidate.html" class="text-sm font-medium text-es-charcoal/70 dark:text-gray-300 hover:text-es-gold dark:hover:text-es-gold-bright transition">Candidates</a>
+                    <span class="text-es-gold/30">•</span>
+                    <a href="practices.html" class="text-sm font-medium text-es-charcoal/70 dark:text-gray-300 hover:text-es-gold dark:hover:text-es-gold-bright transition">Practices</a>
+                    <span class="text-es-gold/30">•</span>
+                    <a href="insights.html" class="text-sm font-medium text-es-charcoal/70 dark:text-gray-300 hover:text-es-gold dark:hover:text-es-gold-bright transition">Insights</a>
+                    <span class="text-es-gold/30">•</span>
+                    <a href="client.html" class="text-sm font-medium text-es-charcoal/70 dark:text-gray-300 hover:text-es-gold dark:hover:text-es-gold-bright transition">Dashboard</a>
+                    <span class="text-es-gold/30">•</span>
+                    <a href="contact.html" class="text-sm font-medium text-es-charcoal/70 dark:text-gray-300 hover:text-es-gold dark:hover:text-es-gold-bright transition">Contact</a>
+                </div>
+            </div>
+
+            <!-- Need Help Note -->
+            <div class="mt-8 text-xs text-es-charcoal/50 dark:text-gray-500">
+                <i class="fas fa-phone mr-1 text-es-gold"></i> Need immediate executive assistance? Call us at <a href="tel:18885672002" class="text-es-gold dark:text-es-gold-bright hover:underline">+1 (888) 567-2002</a>
+            </div>
+
+            <!-- Fun Fact Note -->
+            <div class="mt-4 text-xs text-es-charcoal/40 dark:text-gray-600">
+                <i class="fas fa-smile-wink mr-1"></i> Pro tip: Most executive searches are completed within 4.8 days with our intelligence-led approach.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle
+            const themeBtn = document.getElementById('theme-toggle');
+
+            const updateThemeUI = (isDark) => {
+                if (themeBtn) {
+                    const moon = themeBtn.querySelector('.fa-moon');
+                    const sun = themeBtn.querySelector('.fa-sun');
+                    if (moon && sun) {
+                        if (isDark) { moon.classList.add('hidden'); sun.classList.remove('hidden'); }
+                        else { moon.classList.remove('hidden'); sun.classList.add('hidden'); }
+                    }
+                    themeBtn.classList.toggle('active', isDark);
+                }
+            };
+
+            const toggleTheme = () => {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeUI(isDark);
+            };
+
+            if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+            // Check saved theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeUI(true);
+            } else if (localStorage.getItem('theme') === 'light') {
+                document.documentElement.classList.remove('dark');
+                updateThemeUI(false);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+                updateThemeUI(true);
+            }
+
+            // RTL Toggle
+            const rtlBtn = document.getElementById('rtl-toggle');
+
+            const updateRtlUI = (isRtl) => {
+                const dir = isRtl ? 'rtl' : 'ltr';
+                document.documentElement.dir = dir;
+                document.documentElement.lang = isRtl ? 'ar' : 'en';
+                if (rtlBtn) rtlBtn.classList.toggle('active', isRtl);
+            };
+
+            const toggleRtl = () => {
+                const isRtl = document.documentElement.dir !== 'rtl';
+                localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr');
+                updateRtlUI(isRtl);
+            };
+
+            if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+
+            // Check saved RTL direction
+            if (localStorage.getItem('dir') === 'rtl') {
+                updateRtlUI(true);
+            } else {
+                updateRtlUI(false);
+            }
+
+            // Add active class to theme button based on actual state
+            if (document.documentElement.classList.contains('dark')) {
+                themeBtn?.classList.add('active');
+                const moon = themeBtn?.querySelector('.fa-moon');
+                const sun = themeBtn?.querySelector('.fa-sun');
+                if (moon && sun) {
+                    moon.classList.add('hidden');
+                    sun.classList.remove('hidden');
+                }
+            } else {
+                themeBtn?.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+
+</html>

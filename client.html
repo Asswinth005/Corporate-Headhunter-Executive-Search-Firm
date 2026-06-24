@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Echelon Portal | Client & Candidate Dashboard</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E⚡%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Dual-sided portal: Client side to view vetted candidate pipelines and schedule interviews; Candidate side to manage resume profile and view application status.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'echelon': '#B58A3D',
+                        'echelon-dark': '#9E742F',
+                        'echelon-light': '#D4B06A',
+                        'echelon-glow': '#E8D5A3',
+                        'deep': '#1C1A17',
+                        'slate': '#4A453F',
+                        'mist': '#EAE6DF',
+                        'canvas': '#FAF9F6',
+                        'main-bg': 'var(--bg-primary)',
+                        'surface-bg': 'var(--bg-secondary)',
+                        'card-bg': 'var(--bg-secondary)',
+                        'tertiary-bg': 'var(--bg-tertiary)',
+                        'text-main': 'var(--text-primary)',
+                        'text-sub': 'var(--text-secondary)',
+                        'text-muted': 'var(--text-muted)',
+                        'border-main': 'var(--border-color)',
+                        'gold-accent': 'var(--gold-accent)',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['"Playfair Display"', 'serif'],
+                        'mono': ['"Fira Code"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F3F1EC;
+            --text-primary: #1C1A17;
+            --text-secondary: #4A453F;
+            --text-muted: #8A8276;
+            --border-color: #EAE6DF;
+            --gold-accent: #B58A3D;
+            --gold-light: rgba(181, 138, 61, 0.1);
+            --card-shadow: 0 10px 30px rgba(28, 26, 23, 0.04);
+        }
+
+        .dark {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1E1E1E;
+            --text-primary: #E8E8E8;
+            --text-secondary: #A0A0A0;
+            --text-muted: #6B6B6B;
+            --border-color: #2C2C2C;
+            --gold-accent: #C9A84C;
+            --gold-light: rgba(201, 168, 76, 0.1);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 1023px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            display: none;
+        }
+        .sidebar-overlay.open {
+            display: block;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1.5rem;
+            margin: 0.25rem 0.75rem;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .sidebar-item:hover {
+            background: var(--gold-light);
+            color: var(--gold-accent);
+        }
+        .sidebar-item.active {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+        }
+        .dark .sidebar-item.active {
+            background: var(--gold-accent);
+            color: #0A0A0A;
+        }
+        .sidebar-item i {
+            width: 24px;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+        @media (max-width: 1023px) {
+            .main-content {
+                margin-left: 0;
+                padding-top: 70px;
+            }
+        }
+
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 50;
+            align-items: center;
+            justify-content: space-between;
+        }
+        @media (max-width: 1023px) {
+            .mobile-header {
+                display: flex;
+            }
+        }
+
+        .top-header {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            box-shadow: var(--card-shadow);
+        }
+        .stat-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-3px);
+        }
+
+        .candidate-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            box-shadow: var(--card-shadow);
+        }
+        .candidate-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-primary:hover {
+            background: #9E742F;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(181, 138, 61, 0.4);
+        }
+
+        .btn-outline {
+            border: 1.5px solid var(--gold-accent);
+            background: transparent;
+            color: var(--gold-accent);
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 40px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+        .toggle-btn:hover {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+        }
+
+        .logout-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 0.75rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+        .logout-btn:hover {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .status-active {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+        .status-pending {
+            background: #FFF3E0;
+            color: #EF6C00;
+        }
+        .status-interview {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+        .status-offer {
+            background: #F3E5F5;
+            color: #7B1FA2;
+        }
+        .dark .status-active {
+            background: #1B5E20;
+            color: #A5D6A7;
+        }
+        .dark .status-pending {
+            background: #E65100;
+            color: #FFCC80;
+        }
+        .dark .status-interview {
+            background: #01579B;
+            color: #81D4FA;
+        }
+        .dark .status-offer {
+            background: #4A148C;
+            color: #CE93D8;
+        }
+
+        .pipeline-bar {
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .pipeline-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--gold-accent), #D4B06A);
+            transition: width 0.5s ease;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.75rem;
+            width: 100%;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 0 3px var(--gold-light);
+        }
+
+        .page-content.hidden {
+            display: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-accent);
+            border-radius: 4px;
+        }
+
+        /* Role toggle */
+        .role-toggle {
+            display: flex;
+            background: var(--bg-tertiary);
+            border-radius: 40px;
+            padding: 4px;
+            border: 1px solid var(--border-color);
+        }
+        .role-toggle button {
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            background: transparent;
+            color: var(--text-secondary);
+        }
+        .role-toggle button.active {
+            background: var(--gold-accent);
+            color: #FFFFFF;
+        }
+        .dark .role-toggle button.active {
+            color: #0A0A0A;
+        }
+        .role-toggle button:hover:not(.active) {
+            background: var(--gold-light);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="flex items-center gap-3">
+            <button id="menuToggle" class="toggle-btn"><i class="fas fa-bars"></i></button>
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300">
+                    <i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-sans font-extrabold tracking-tight text-text-main transition-colors duration-300">Echelon</span>
+                    <span class="text-gold-accent font-sans font-light ml-1 text-sm transition-colors duration-300">Search</span>
+                </div>
+            </a>
+        </div>
+        <div class="flex gap-2">
+            <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+            <button id="rtl-toggle" class="toggle-btn">⇄</button>
+        </div>
+    </div>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="p-5 border-b border-border-color">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300">
+                    <i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-sans font-extrabold tracking-tight text-text-main transition-colors duration-300">Echelon</span>
+                    <span class="text-gold-accent font-sans font-light ml-1 text-sm transition-colors duration-300">Search</span>
+                </div>
+            </a>
+            <p class="text-xs text-text-muted px-1 mt-2" id="sidebar-role-label">Client View</p>
+        </div>
+        <nav class="py-4 flex-grow overflow-y-auto" id="sidebar-nav">
+            <!-- Client items -->
+            <div class="sidebar-item active" data-page="client-dashboard" data-role="client"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div>
+            <div class="sidebar-item" data-page="client-pipeline" data-role="client"><i class="fas fa-users"></i><span>Candidate Pipeline</span></div>
+            <div class="sidebar-item" data-page="client-interviews" data-role="client"><i class="fas fa-calendar-check"></i><span>Schedule Interviews</span></div>
+            <div class="sidebar-item" data-page="client-shortlist" data-role="client"><i class="fas fa-star"></i><span>Shortlist</span></div>
+            <!-- Candidate items -->
+            <div class="sidebar-item" data-page="candidate-dashboard" data-role="candidate"><i class="fas fa-id-card"></i><span>My Profile</span></div>
+            <div class="sidebar-item" data-page="candidate-applications" data-role="candidate"><i class="fas fa-clipboard-list"></i><span>Applications</span></div>
+            <div class="sidebar-item" data-page="candidate-interviews" data-role="candidate"><i class="fas fa-video"></i><span>My Interviews</span></div>
+            <div class="sidebar-item" data-page="candidate-resume" data-role="candidate"><i class="fas fa-file-alt"></i><span>Resume Manager</span></div>
+            <!-- Shared -->
+            <div class="sidebar-item" data-page="settings" data-role="both"><i class="fas fa-cog"></i><span>Settings</span></div>
+        </nav>
+        <div class="p-4 border-t border-border-color shrink-0">
+            <div class="flex flex-col gap-2">
+                <div class="role-toggle" id="roleToggle">
+                    <button class="active" data-role="client">Client</button>
+                    <button data-role="candidate">Candidate</button>
+                </div>
+                <a href="login.html" class="logout-btn w-full gap-2 font-semibold text-sm">Logout <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-header flex justify-between items-center flex-wrap gap-3">
+            <div>
+                <h1 class="text-2xl font-display font-bold" id="page-title">Client Dashboard</h1>
+                <p class="text-sm text-text-muted" id="page-subtitle">Welcome back, Alexandra Chen</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle-top" class="toggle-btn hidden lg:inline-flex"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <button id="rtl-toggle-top" class="toggle-btn hidden lg:inline-flex">⇄</button>
+            </div>
+        </div>
+
+        <!-- ===== CLIENT DASHBOARD ===== -->
+        <div id="page-client-dashboard" class="page-content">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-text-muted mb-1">Active Candidates</p><p class="text-2xl font-bold text-gold-accent">24</p></div><div class="w-10 h-10 bg-gold-light rounded-full flex items-center justify-center"><i class="fas fa-users text-gold-accent"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-text-muted mb-1">Screening</p><p class="text-2xl font-bold text-gold-accent">8</p></div><div class="w-10 h-10 bg-gold-light rounded-full flex items-center justify-center"><i class="fas fa-search text-gold-accent"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-text-muted mb-1">Interviews Scheduled</p><p class="text-2xl font-bold text-gold-accent">5</p></div><div class="w-10 h-10 bg-gold-light rounded-full flex items-center justify-center"><i class="fas fa-calendar text-gold-accent"></i></div></div></div>
+                <div class="stat-card"><div class="flex justify-between"><div><p class="text-xs text-text-muted mb-1">Offer Stage</p><p class="text-2xl font-bold text-gold-accent">3</p></div><div class="w-10 h-10 bg-gold-light rounded-full flex items-center justify-center"><i class="fas fa-handshake text-gold-accent"></i></div></div></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="stat-card">
+                    <h3 class="font-display font-bold text-lg mb-3">Pipeline Overview</h3>
+                    <div class="space-y-3">
+                        <div><div class="flex justify-between text-sm"><span>Sourced</span><span>24</span></div><div class="pipeline-bar"><div class="pipeline-fill" style="width:100%"></div></div></div>
+                        <div><div class="flex justify-between text-sm"><span>Screened</span><span>16</span></div><div class="pipeline-bar"><div class="pipeline-fill" style="width:67%"></div></div></div>
+                        <div><div class="flex justify-between text-sm"><span>Interviews</span><span>8</span></div><div class="pipeline-bar"><div class="pipeline-fill" style="width:33%"></div></div></div>
+                        <div><div class="flex justify-between text-sm"><span>Offer</span><span>3</span></div><div class="pipeline-bar"><div class="pipeline-fill" style="width:13%"></div></div></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="font-display font-bold text-lg mb-3">Recent Activity</h3>
+                    <div class="space-y-3">
+                        <div class="flex gap-3 pb-2 border-b border-border-color"><i class="fas fa-user-plus text-gold-accent"></i><div><p class="text-sm font-medium">New candidate added: Sarah Mitchell</p><p class="text-xs text-text-muted">2 hours ago</p></div></div>
+                        <div class="flex gap-3 pb-2 border-b border-border-color"><i class="fas fa-calendar-check text-gold-accent"></i><div><p class="text-sm font-medium">Interview scheduled with James Park</p><p class="text-xs text-text-muted">Today, 2:00 PM</p></div></div>
+                        <div class="flex gap-3"><i class="fas fa-star text-gold-accent"></i><div><p class="text-sm font-medium">Maria Santos moved to shortlist</p><p class="text-xs text-text-muted">Yesterday, 4:30 PM</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CLIENT PIPELINE ===== -->
+        <div id="page-client-pipeline" class="page-content hidden">
+            <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                <h2 class="text-xl font-display font-bold">Vetted Candidate Pipeline</h2>
+                <div class="flex gap-2"><input type="text" placeholder="Search candidates..." class="form-input w-48 md:w-64"><button class="btn-primary"><i class="fas fa-search"></i></button></div>
+            </div>
+            <div class="space-y-3">
+                <div class="candidate-card flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-gold-light flex items-center justify-center text-gold-accent font-bold">SM</div><div><p class="font-bold">Sarah Mitchell</p><p class="text-sm text-text-muted">CEO • Fintech</p></div></div>
+                    <div class="flex items-center gap-3 flex-wrap"><span class="status-badge status-active">Active</span><span class="text-sm">95% Match</span><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-calendar-plus"></i> Interview</button><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-star"></i> Shortlist</button></div>
+                </div>
+                <div class="candidate-card flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-gold-light flex items-center justify-center text-gold-accent font-bold">JP</div><div><p class="font-bold">James Park</p><p class="text-sm text-text-muted">CTO • GenAI</p></div></div>
+                    <div class="flex items-center gap-3 flex-wrap"><span class="status-badge status-interview">Interview</span><span class="text-sm">92% Match</span><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-calendar-plus"></i> Interview</button><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-star"></i> Shortlist</button></div>
+                </div>
+                <div class="candidate-card flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-gold-light flex items-center justify-center text-gold-accent font-bold">MS</div><div><p class="font-bold">Maria Santos</p><p class="text-sm text-text-muted">VP Engineering • HealthTech</p></div></div>
+                    <div class="flex items-center gap-3 flex-wrap"><span class="status-badge status-offer">Offer</span><span class="text-sm">88% Match</span><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-calendar-plus"></i> Interview</button><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-star"></i> Shortlist</button></div>
+                </div>
+                <div class="candidate-card flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-gold-light flex items-center justify-center text-gold-accent font-bold">DC</div><div><p class="font-bold">David Chen</p><p class="text-sm text-text-muted">COO • Private Equity</p></div></div>
+                    <div class="flex items-center gap-3 flex-wrap"><span class="status-badge status-pending">Screening</span><span class="text-sm">78% Match</span><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-calendar-plus"></i> Interview</button><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-star"></i> Shortlist</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CLIENT INTERVIEWS ===== -->
+        <div id="page-client-interviews" class="page-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="stat-card lg:col-span-2">
+                    <h3 class="font-display font-bold text-xl mb-4">Schedule an Interview</h3>
+                    <div class="space-y-4">
+                        <div><label class="block text-sm font-medium mb-1">Candidate</label><select class="form-select"><option>Sarah Mitchell – CEO, Fintech</option><option>James Park – CTO, GenAI</option><option>Maria Santos – VP Eng, HealthTech</option></select></div>
+                        <div><label class="block text-sm font-medium mb-1">Date</label><input type="date" class="form-input"></div>
+                        <div><label class="block text-sm font-medium mb-1">Time Slot</label><select class="form-select"><option>9:00 AM</option><option>10:30 AM</option><option>1:00 PM</option><option>2:30 PM</option><option>4:00 PM</option></select></div>
+                        <div><label class="block text-sm font-medium mb-1">Interview Type</label><select class="form-select"><option>Initial Screening (30 min)</option><option>Technical Assessment (60 min)</option><option>Final Panel (90 min)</option></select></div>
+                        <button class="btn-primary w-full"><i class="fas fa-calendar-plus"></i> Schedule Interview</button>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="font-display font-bold text-lg mb-3">Upcoming Interviews</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-gold-light/20 rounded-xl"><p class="font-semibold">James Park</p><p class="text-sm text-text-muted">Today • 2:00 PM</p><span class="status-badge status-interview">Confirmed</span></div>
+                        <div class="p-3 bg-gold-light/20 rounded-xl"><p class="font-semibold">Sarah Mitchell</p><p class="text-sm text-text-muted">June 18 • 10:30 AM</p><span class="status-badge status-pending">Pending</span></div>
+                        <div class="p-3 bg-gold-light/20 rounded-xl"><p class="font-semibold">David Chen</p><p class="text-sm text-text-muted">June 20 • 1:00 PM</p><span class="status-badge status-pending">Pending</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CLIENT SHORTLIST ===== -->
+        <div id="page-client-shortlist" class="page-content hidden">
+            <div class="stat-card">
+                <h3 class="font-display font-bold text-xl mb-4"><i class="fas fa-star text-gold-accent"></i> Shortlisted Candidates</h3>
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center justify-between p-3 border-b border-border-color"><div><p class="font-bold">Sarah Mitchell</p><p class="text-sm text-text-muted">CEO • Fintech</p></div><div><span class="status-badge status-active">Active</span><button class="btn-outline text-sm py-1 px-3 ml-2"><i class="fas fa-calendar-plus"></i> Interview</button></div></div>
+                    <div class="flex flex-wrap items-center justify-between p-3 border-b border-border-color"><div><p class="font-bold">Maria Santos</p><p class="text-sm text-text-muted">VP Engineering • HealthTech</p></div><div><span class="status-badge status-offer">Offer</span><button class="btn-outline text-sm py-1 px-3 ml-2"><i class="fas fa-calendar-plus"></i> Interview</button></div></div>
+                    <div class="flex flex-wrap items-center justify-between p-3"><div><p class="font-bold">James Park</p><p class="text-sm text-text-muted">CTO • GenAI</p></div><div><span class="status-badge status-interview">Interview</span><button class="btn-outline text-sm py-1 px-3 ml-2"><i class="fas fa-calendar-plus"></i> Interview</button></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CANDIDATE DASHBOARD ===== -->
+        <div id="page-candidate-dashboard" class="page-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="stat-card lg:col-span-1">
+                    <div class="text-center"><div class="w-24 h-24 rounded-full bg-gold-light mx-auto flex items-center justify-center text-gold-accent text-4xl font-bold">AK</div>
+                    <h2 class="text-xl font-display font-bold mt-3">Alexandra Kim</h2>
+                    <p class="text-text-muted text-sm">Chief Marketing Officer</p>
+                    <p class="text-xs text-text-muted mt-1">📍 San Francisco, CA</p>
+                    <div class="flex justify-center gap-2 mt-3"><span class="status-badge status-active">Active</span><span class="status-badge status-interview">Open to offers</span></div>
+                    <button class="btn-primary w-full mt-4"><i class="fas fa-edit"></i> Edit Profile</button></div>
+                </div>
+                <div class="stat-card lg:col-span-2">
+                    <h3 class="font-display font-bold text-lg mb-3">Profile Summary</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div><p class="text-xs text-text-muted">Experience</p><p class="font-semibold">12+ years</p></div>
+                        <div><p class="text-xs text-text-muted">Industries</p><p class="font-semibold">Tech, SaaS, Fintech</p></div>
+                        <div><p class="text-xs text-text-muted">Education</p><p class="font-semibold">MBA, Stanford</p></div>
+                        <div><p class="text-xs text-text-muted">Languages</p><p class="font-semibold">English, Korean</p></div>
+                    </div>
+                    <div class="mt-4"><p class="text-xs text-text-muted">Skills</p><div class="flex flex-wrap gap-2 mt-1"><span class="px-3 py-1 bg-gold-light rounded-full text-xs">Digital Strategy</span><span class="px-3 py-1 bg-gold-light rounded-full text-xs">Brand Management</span><span class="px-3 py-1 bg-gold-light rounded-full text-xs">Team Leadership</span><span class="px-3 py-1 bg-gold-light rounded-full text-xs">GTM Strategy</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CANDIDATE APPLICATIONS ===== -->
+        <div id="page-candidate-applications" class="page-content hidden">
+            <div class="stat-card">
+                <h3 class="font-display font-bold text-xl mb-4">My Applications</h3>
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center justify-between p-3 border-b border-border-color"><div><p class="font-bold">CEO – Fintech Unicorn</p><p class="text-sm text-text-muted">Applied: May 28, 2026</p></div><span class="status-badge status-interview">Interview</span></div>
+                    <div class="flex flex-wrap items-center justify-between p-3 border-b border-border-color"><div><p class="font-bold">CMO – SaaS Platform</p><p class="text-sm text-text-muted">Applied: May 15, 2026</p></div><span class="status-badge status-active">Screening</span></div>
+                    <div class="flex flex-wrap items-center justify-between p-3 border-b border-border-color"><div><p class="font-bold">VP Marketing – HealthTech</p><p class="text-sm text-text-muted">Applied: May 2, 2026</p></div><span class="status-badge status-offer">Offer</span></div>
+                    <div class="flex flex-wrap items-center justify-between p-3"><div><p class="font-bold">Chief Brand Officer – Fintech</p><p class="text-sm text-text-muted">Applied: April 20, 2026</p></div><span class="status-badge status-pending">Withdrawn</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CANDIDATE INTERVIEWS ===== -->
+        <div id="page-candidate-interviews" class="page-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">Upcoming Interviews</h3>
+                    <div class="space-y-3"><div class="p-3 bg-gold-light/20 rounded-xl"><p class="font-semibold">CEO – Fintech Unicorn</p><p class="text-sm">June 18, 2026 • 2:00 PM</p><span class="status-badge status-interview">Confirmed</span><p class="text-xs text-text-muted mt-1">Panel interview with CEO & Board</p></div>
+                    <div class="p-3 bg-gold-light/20 rounded-xl"><p class="font-semibold">CMO – SaaS Platform</p><p class="text-sm">June 22, 2026 • 10:30 AM</p><span class="status-badge status-pending">Pending</span></div></div>
+                </div>
+                <div class="stat-card"><h3 class="font-display font-bold text-xl mb-4">Interview History</h3>
+                    <div class="space-y-3"><div class="p-3 border-b border-border-color"><p class="font-semibold">VP Marketing – HealthTech</p><p class="text-sm text-text-muted">Completed: June 10, 2026</p><span class="status-badge status-offer">Offer Received</span></div>
+                    <div class="p-3"><p class="font-semibold">Chief Brand Officer – Fintech</p><p class="text-sm text-text-muted">Completed: May 25, 2026</p><span class="status-badge status-pending">Declined</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CANDIDATE RESUME ===== -->
+        <div id="page-candidate-resume" class="page-content hidden">
+            <div class="stat-card">
+                <h3 class="font-display font-bold text-xl mb-4">Resume Manager</h3>
+                <div class="flex flex-wrap items-center justify-between p-4 bg-gold-light/20 rounded-xl mb-4"><div><p class="font-bold">Alexandra_Kim_CMO_2026.pdf</p><p class="text-sm text-text-muted">Uploaded: May 28, 2026 • 245 KB</p></div><button class="btn-outline text-sm py-1 px-3"><i class="fas fa-download"></i> Download</button></div>
+                <div class="space-y-4"><div><label class="block text-sm font-medium mb-1">Upload New Resume</label><input type="file" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">LinkedIn Profile</label><input type="url" value="linkedin.com/in/alexandrakim" class="form-input"></div>
+                <div><label class="block text-sm font-medium mb-1">Portfolio / Website</label><input type="url" value="alexandrakim.design" class="form-input"></div>
+                <button class="btn-primary"><i class="fas fa-save"></i> Save Changes</button></div>
+            </div>
+        </div>
+
+        <!-- ===== SETTINGS ===== -->
+        <div id="page-settings" class="page-content hidden">
+            <div class="stat-card">
+                <h3 class="font-display font-bold text-xl mb-4">Settings</h3>
+                <div class="space-y-4">
+                    <div><label class="block text-sm font-medium mb-1">Display Name</label><input type="text" value="Alexandra Chen" class="form-input"></div>
+                    <div><label class="block text-sm font-medium mb-1">Email</label><input type="email" value="alexandra@echelon.com" class="form-input"></div>
+                    <div><label class="block text-sm font-medium mb-1">Notification Preferences</label>
+                        <div class="space-y-2"><label class="flex items-center gap-2"><input type="checkbox" checked class="rounded text-gold-accent"> Interview reminders</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" checked class="rounded text-gold-accent"> Candidate match alerts</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" class="rounded text-gold-accent"> Weekly digest</label></div>
+                    </div>
+                    <button class="btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            const themeToggleTop = document.getElementById('theme-toggle-top');
+
+            function setTheme(isDark) {
+                if (isDark) document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
+                [themeToggle, themeToggleMobile, themeToggleTop].forEach(btn => {
+                    if (btn) {
+                        let moon = btn.querySelector('.fa-moon'),
+                            sun = btn.querySelector('.fa-sun');
+                        if (isDark) { moon?.classList.add('hidden');
+                            sun?.classList.remove('hidden'); } else { moon?.classList.remove('hidden');
+                            sun?.classList.add('hidden'); }
+                    }
+                });
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+            const savedTheme = localStorage.getItem('theme');
+            setTheme(savedTheme === 'dark');
+            if (themeToggle) themeToggle.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+            if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+            if (themeToggleTop) themeToggleTop.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+
+            // RTL
+            const rtlBtns = document.querySelectorAll('#rtl-toggle, #rtl-toggle-top');
+            function setRTL(isRTL) { document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+                localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr'); }
+            if (localStorage.getItem('dir') === 'rtl') setRTL(true);
+            rtlBtns.forEach(btn => btn?.addEventListener('click', () => setRTL(document.documentElement.dir !== 'rtl')));
+
+            // Mobile Sidebar
+            const menuToggle = document.getElementById('menuToggle'),
+                sidebar = document.getElementById('sidebar'),
+                overlay = document.getElementById('sidebarOverlay');
+
+            function closeSidebar() { sidebar.classList.remove('open');
+                overlay.classList.remove('open'); }
+
+            function openSidebar() { sidebar.classList.add('open');
+                overlay.classList.add('open'); }
+            if (menuToggle) menuToggle.addEventListener('click', (e) => { e.stopPropagation();
+                sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+            if (overlay) overlay.addEventListener('click', closeSidebar);
+            window.addEventListener('resize', () => { if (window.innerWidth > 768 && sidebar.classList.contains('open')) closeSidebar(); });
+
+            // Role Toggle
+            const roleToggle = document.getElementById('roleToggle');
+            const roleBtns = roleToggle.querySelectorAll('button');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const pages = document.querySelectorAll('.page-content');
+            const pageTitle = document.getElementById('page-title'),
+                pageSubtitle = document.getElementById('page-subtitle');
+            const sidebarRoleLabel = document.getElementById('sidebar-role-label');
+
+            const pageTitles = {
+                'client-dashboard': { title: 'Client Dashboard', subtitle: 'Welcome back, Alexandra Chen' },
+                'client-pipeline': { title: 'Candidate Pipeline', subtitle: 'View vetted candidates and manage your pipeline' },
+                'client-interviews': { title: 'Schedule Interviews', subtitle: 'Book and manage interviews with candidates' },
+                'client-shortlist': { title: 'Shortlist', subtitle: 'Your top candidates for quick access' },
+                'candidate-dashboard': { title: 'My Profile', subtitle: 'Manage your professional profile' },
+                'candidate-applications': { title: 'Applications', subtitle: 'Track your application status' },
+                'candidate-interviews': { title: 'My Interviews', subtitle: 'View upcoming and past interviews' },
+                'candidate-resume': { title: 'Resume Manager', subtitle: 'Upload and manage your resume' },
+                'settings': { title: 'Settings', subtitle: 'Update your profile and preferences' }
+            };
+
+            let currentRole = 'client';
+            let currentPage = 'client-dashboard';
+
+            function navigateTo(page) {
+                sidebarItems.forEach(i => i.classList.remove('active'));
+                document.querySelector(`.sidebar-item[data-page="${page}"]`)?.classList.add('active');
+                pages.forEach(p => p.classList.add('hidden'));
+                document.getElementById(`page-${page}`)?.classList.remove('hidden');
+                if (pageTitles[page]) {
+                    pageTitle.textContent = pageTitles[page].title;
+                    pageSubtitle.textContent = pageTitles[page].subtitle;
+                }
+                currentPage = page;
+                closeSidebar();
+            }
+
+            function setRole(role) {
+                currentRole = role;
+                roleBtns.forEach(b => { b.classList.toggle('active', b.getAttribute('data-role') === role); });
+                sidebarItems.forEach(item => {
+                    const itemRole = item.getAttribute('data-role');
+                    if (itemRole === 'both' || itemRole === role) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                sidebarRoleLabel.textContent = role === 'client' ? 'Client View' : 'Candidate View';
+                // Navigate to default page for role
+                const defaultPage = role === 'client' ? 'client-dashboard' : 'candidate-dashboard';
+                // Check if default page exists
+                if (document.getElementById(`page-${defaultPage}`)) {
+                    navigateTo(defaultPage);
+                }
+            }
+
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setRole(btn.getAttribute('data-role'));
+                });
+            });
+
+            // Sidebar navigation
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const page = item.getAttribute('data-page');
+                    const role = item.getAttribute('data-role');
+                    if (role === 'both' || role === currentRole) {
+                        navigateTo(page);
+                    }
+                });
+            });
+
+            // Quick nav buttons from dashboard
+            document.querySelectorAll('[data-nav]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = btn.getAttribute('data-nav');
+                    // Check if the page exists for current role
+                    const item = document.querySelector(`.sidebar-item[data-page="${page}"]`);
+                    if (item) {
+                        const role = item.getAttribute('data-role');
+                        if (role === 'both' || role === currentRole) {
+                            navigateTo(page);
+                        }
+                    }
+                });
+            });
+
+            // Initialize with client role
+            setRole('client');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
+    <title>Sign In · Echelon Search | Executive Intelligence</title>
+    <!-- Custom Favicon - Echelon Search -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23C9A84C' d='M256 32c-14.8 0-26.7 12-26.7 26.7v26.7c0 14.7 11.9 26.7 26.7 26.7s26.7-12 26.7-26.7V58.7c0-14.7-11.9-26.7-26.7-26.7zm117.3 74.7c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zm-234.6 0c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zM256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 213.3c-47.1 0-85.3-38.2-85.3-85.3s38.2-85.3 85.3-85.3 85.3 38.2 85.3 85.3-38.2 85.3-85.3 85.3z'/%3E%3C/svg%3E">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'es-gold': '#C9A84C',
+                        'es-gold-dark': '#B58A3D',
+                        'es-gold-bright': '#D6B95A',
+                        'es-charcoal': '#1C1A17',
+                        'es-slate': '#2E2A24',
+                        'es-light': '#FAF9F6',
+                        'es-card': '#FFFFFF',
+                        'dark-bg': '#0A0A0A',
+                        'dark-card': '#121212',
+                        'dark-surface': '#1E1E1E',
+                        'es-muted': '#8A8276',
+                        'es-border': '#EAE6DF',
+                        'main-bg': 'var(--bg-primary)',
+                        'surface-bg': 'var(--bg-secondary)',
+                        'card-bg': 'var(--bg-secondary)',
+                        'tertiary-bg': 'var(--bg-tertiary)',
+                        'text-main': 'var(--text-primary)',
+                        'text-sub': 'var(--text-secondary)',
+                        'text-muted': 'var(--text-muted)',
+                        'border-main': 'var(--border-color)',
+                        'gold-accent': 'var(--gold-accent)',
+                    },
+                    fontFamily: {
+                        'display': ['Inter', 'system-ui', 'sans-serif'],
+                        'body': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'es-pattern': "radial-gradient(circle at 20% 30%, rgba(201,168,76,0.05) 0%, transparent 60%)",
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F3F1EC;
+            --text-primary: #1C1A17;
+            --text-secondary: #4A453F;
+            --text-muted: #8A8276;
+            --border-color: #EAE6DF;
+            --gold-accent: #B58A3D;
+            --gold-light: rgba(181, 138, 61, 0.1);
+            --card-shadow: 0 10px 30px rgba(28, 26, 23, 0.04);
+        }
+
+        .dark {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1E1E1E;
+            --text-primary: #E8E8E8;
+            --text-secondary: #A0A0A0;
+            --text-muted: #6B6B6B;
+            --border-color: #2C2C2C;
+            --gold-accent: #C9A84C;
+            --gold-light: rgba(201, 168, 76, 0.1);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .dark body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle-wrapper {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 1000;
+            display: flex;
+            gap: 6px;
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            color: #1C1A17;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(201,168,76,0.3);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dark .toggle-btn {
+            background: #121212;
+            color: #C9A84C;
+            border-color: rgba(201,168,76,0.4);
+        }
+
+        .toggle-btn:hover {
+            background: #C9A84C;
+            color: #FAF9F6;
+        }
+
+        .dark .toggle-btn:hover {
+            background: #C9A84C;
+            color: #0A0A0A;
+        }
+
+        .toggle-btn.active {
+            background: #C9A84C;
+            color: #FAF9F6;
+        }
+
+        .login-card {
+            background: #FFFFFF;
+            border-radius: 36px;
+            padding: 2.2rem 2rem 2rem;
+            box-shadow: 0 20px 45px rgba(28,26,23,0.08);
+            border: 1px solid rgba(201,168,76,0.2);
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        .dark .login-card {
+            background: #121212;
+            border-color: #2C2C2C;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 0.85rem 1.2rem 0.85rem 3rem;
+            border-radius: 50px;
+            border: 1px solid #EAE6DF;
+            background: #FFFFFF;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            color: #1C1A17;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dark .login-input {
+            background: #1E1E1E;
+            border-color: #2C2C2C;
+            color: #E8E8E8;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #C9A84C;
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.25);
+        }
+
+        .dark .login-input:focus {
+            border-color: #D6B95A;
+            box-shadow: 0 0 0 3px rgba(214,185,90,0.25);
+        }
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-wrapper .login-input {
+            padding-right: 3rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #C9A84C;
+            font-size: 1rem;
+            transition: color 0.2s;
+            background: transparent;
+            border: none;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark .toggle-password {
+            color: #D6B95A;
+        }
+
+        .toggle-password:hover {
+            color: #B58A3D;
+        }
+
+        [dir="rtl"] .toggle-password {
+            right: auto;
+            left: 1rem;
+        }
+
+        [dir="rtl"] .password-wrapper .login-input {
+            padding-right: 3rem;
+            padding-left: 3rem;
+        }
+
+        [dir="rtl"] .input-icon {
+            left: auto;
+            right: 0;
+            padding-left: 0;
+            padding-right: 1rem;
+        }
+
+        .es-btn {
+            background: #C9A84C;
+            color: #1C1A17;
+            font-weight: 500;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .es-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201,168,76,0.4);
+            background: #B58A3D;
+        }
+
+        .dark .es-btn {
+            background: #D6B95A;
+            color: #0A0A0A;
+        }
+
+        .dark .es-btn:hover {
+            background: #C9A84C;
+        }
+
+        .social-btn-row {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.8rem 0.5rem;
+            border-radius: 50px;
+            border: 1px solid #EAE6DF;
+            background: #FFFFFF;
+            color: #1C1A17;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            gap: 0.5rem;
+            white-space: nowrap;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dark .social-btn {
+            background: #1E1E1E;
+            border-color: #2C2C2C;
+            color: #E8E8E8;
+        }
+
+        .social-btn:hover {
+            background: rgba(201,168,76,0.1);
+            border-color: #C9A84C;
+            transform: translateY(-2px);
+        }
+
+        .dark .social-btn:hover {
+            background: rgba(201,168,76,0.15);
+            border-color: #D6B95A;
+        }
+
+        .social-btn i {
+            font-size: 1.1rem;
+            color: #C9A84C;
+        }
+
+        .dark .social-btn i {
+            color: #D6B95A;
+        }
+
+        .logo-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-logo {
+            background: #C9A84C;
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+            box-shadow: 0 4px 10px rgba(201,168,76,0.3);
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .brand-logo {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .brand-logo i {
+            color: #1C1A17;
+        }
+
+        .dark .brand-logo i {
+            color: #0A0A0A;
+        }
+
+        .welcome-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1C1A17;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .dark .welcome-title {
+            color: #E8E8E8;
+        }
+
+        .welcome-subtitle {
+            font-size: 0.9rem;
+            color: #8A8276;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dark .welcome-subtitle {
+            color: #6B6B6B;
+        }
+
+        [dir="rtl"] .login-input {
+            padding: 0.85rem 3rem 0.85rem 1.2rem;
+        }
+
+        [dir="rtl"] .fa-arrow-right {
+            transform: scaleX(-1);
+        }
+
+        [dir="rtl"] .theme-toggle-wrapper {
+            right: auto;
+            left: 20px;
+        }
+
+        @media (max-height: 650px) {
+            .login-card {
+                padding: 0.8rem 1.5rem;
+                transform: scale(0.95);
+                transform-origin: center;
+            }
+            .logo-center {
+                margin-bottom: 0.5rem;
+            }
+            .welcome-title {
+                font-size: 1.3rem;
+                margin-top: 0;
+            }
+            .welcome-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 0.5rem;
+            }
+            .login-input {
+                padding: 0.6rem 0.8rem 0.6rem 2.5rem;
+                font-size: 0.85rem;
+            }
+            .es-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+                margin-top: 0.25rem;
+            }
+            .theme-toggle-wrapper {
+                top: 8px;
+                right: 8px;
+            }
+            .toggle-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .login-card {
+                padding: 1.5rem 1.2rem;
+                border-radius: 24px;
+            }
+            .logo-center {
+                margin-bottom: 1rem;
+            }
+            .welcome-title {
+                font-size: 1.3rem;
+            }
+            .login-input {
+                padding: 0.7rem 1rem 0.7rem 2.8rem;
+                font-size: 0.85rem;
+            }
+            .es-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .theme-toggle-wrapper {
+                top: 12px;
+                right: 12px;
+            }
+            [dir="rtl"] .theme-toggle-wrapper {
+                left: 12px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .container-tight {
+            max-width: 480px;
+            width: 100%;
+            padding: 0 1.2rem;
+        }
+
+        .text-es-gold {
+            color: #C9A84C;
+        }
+
+        a {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+
+<body class="es-pattern">
+
+    <!-- ===== THEME TOGGLES - TOP-RIGHT ===== -->
+    <div class="theme-toggle-wrapper">
+        <button id="theme-toggle" class="toggle-btn" title="Dark / Light">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
+            ⇄
+        </button>
+    </div>
+
+    <!-- ===== LOGIN CARD ===== -->
+    <div class="container-tight">
+        <div class="login-card animate-fade-in">
+
+            <!-- ===== LOGO - CENTERED ===== -->
+            <div class="logo-center mb-8">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300">
+                        <i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-sans font-extrabold tracking-tight text-text-main transition-colors duration-300">Echelon</span>
+                        <span class="text-gold-accent font-sans font-light ml-1 text-sm transition-colors duration-300">Search</span>
+                    </div>
+                </a>
+
+                <h1 class="welcome-title mt-4">Secure Access</h1>
+                <p class="welcome-subtitle">Sign in to your executive intelligence dashboard</p>
+            </div>
+
+            <!-- ===== LOGIN FORM ===== -->
+            <form id="loginForm" class="space-y-5" action="#" method="GET">
+
+                <!-- email field -->
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-es-gold input-icon">
+                        <i class="fas fa-envelope w-5 text-sm"></i>
+                    </span>
+                    <input type="email" name="email" id="login-email" placeholder="Email address" required
+                        class="login-input text-sm md:text-base">
+                </div>
+
+                <!-- password field with eye icon -->
+                <div class="password-wrapper">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-es-gold input-icon">
+                        <i class="fas fa-lock w-5 text-sm"></i>
+                    </span>
+                    <input type="password" id="login-password" name="password" placeholder="Password" required
+                        class="login-input text-sm md:text-base">
+                    <button type="button" class="toggle-password" data-target="login-password"
+                        aria-label="Show password">
+                        <i class="far fa-eye-slash"></i>
+                    </button>
+                </div>
+
+                <!-- remember + forgot -->
+                <div class="flex items-center justify-between text-xs md:text-sm">
+                    <label class="flex items-center space-x-2 rtl:space-x-reverse cursor-pointer text-es-slate dark:text-gray-300">
+                        <input type="checkbox"
+                            class="rounded border-gray-300 dark:border-gray-600 text-es-gold focus:ring-es-gold/30 dark:bg-gray-700"
+                            checked>
+                        <span class="ml-1 rtl:mr-1">Remember me</span>
+                    </label>
+                    <a href="#" id="forgotPasswordLink" dir="ltr"
+                        class="text-es-gold dark:text-es-gold-bright hover:text-es-gold-dark font-medium transition hover:underline inline-block">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="es-btn mt-3">
+                    Sign In
+                </button>
+
+                <!-- divider -->
+                <div class="relative my-4">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+                    </div>
+                    <div class="relative justify-center flex text-xs">
+                        <span class="bg-white dark:bg-[#121212] px-4 py-0.5 text-es-muted dark:text-gray-400 rounded-full">
+                            or continue with
+                        </span>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- ===== SOCIAL LOGIN BUTTONS ===== -->
+            <div class="mt-6">
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="social-btn group w-full flex items-center justify-center gap-2 py-3 px-2 text-sm"
+                        onclick="socialLogin('linkedin')">
+                        <i class="fab fa-linkedin-in text-base"></i>
+                        <span>LinkedIn</span>
+                    </button>
+                    <button class="social-btn group w-full flex items-center justify-center gap-2 py-3 px-2 text-sm"
+                        onclick="socialLogin('google')">
+                        <i class="fab fa-google text-base"></i>
+                        <span>Google</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===== "NOT A MEMBER? SIGN UP" LINK ===== -->
+            <div class="text-center mt-6 pt-4 border-t border-dashed border-gray-200 dark:border-gray-700/40" dir="ltr">
+                <span class="text-es-charcoal dark:text-gray-300 text-sm md:text-base">New to Echelon Search?</span>
+                <a href="signup.html"
+                    class="inline-flex items-center text-es-gold dark:text-es-gold-bright font-medium hover:text-es-gold-dark transition hover:underline text-sm md:text-base ml-1">
+                Sign up
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+            (function () {
+                // ---------- THEME TOGGLE ----------
+                const themeToggle = document.getElementById('theme-toggle');
+
+                function setTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+
+                    const icon = themeToggle?.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-sun', 'fa-moon');
+                        icon.classList.add(isDark ? 'fa-moon' : 'fa-sun');
+                    }
+
+                    if (isDark) {
+                        themeToggle?.classList.add('active');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        themeToggle?.classList.remove('active');
+                        localStorage.setItem('theme', 'light');
+                    }
+                }
+
+                // Check for saved theme or system preference
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    setTheme(true);
+                } else if (savedTheme === 'light') {
+                    setTheme(false);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    setTheme(true);
+                } else {
+                    setTheme(false);
+                }
+
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        setTheme(!document.documentElement.classList.contains('dark'));
+                    });
+                }
+
+                // ---------- RTL TOGGLE ----------
+                const rtlBtn = document.getElementById('rtl-toggle');
+
+                function setRTL(isRTL) {
+                    if (isRTL) {
+                        document.documentElement.dir = 'rtl';
+                        document.documentElement.lang = 'ar';
+                        rtlBtn?.classList.add('active');
+                        localStorage.setItem('dir', 'rtl');
+                    } else {
+                        document.documentElement.dir = 'ltr';
+                        document.documentElement.lang = 'en';
+                        rtlBtn?.classList.remove('active');
+                        localStorage.setItem('dir', 'ltr');
+                    }
+                }
+                const savedDir = localStorage.getItem('dir');
+                savedDir === 'rtl' ? setRTL(true) : setRTL(false);
+
+                if (rtlBtn) {
+                    rtlBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        setRTL(document.documentElement.dir !== 'rtl');
+                    });
+                }
+
+                // ---------- EYE ICON TOGGLE PASSWORD VISIBILITY ----------
+                const toggleButtons = document.querySelectorAll('.toggle-password');
+                toggleButtons.forEach(button => {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('data-target');
+                        const passwordInput = document.getElementById(targetId);
+                        if (passwordInput) {
+                            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordInput.setAttribute('type', type);
+                            const icon = this.querySelector('i');
+                            if (icon) {
+                                if (type === 'text') {
+                                    icon.classList.remove('fa-eye-slash');
+                                    icon.classList.add('fa-eye');
+                                } else {
+                                    icon.classList.remove('fa-eye');
+                                    icon.classList.add('fa-eye-slash');
+                                }
+                            }
+                        }
+                    });
+                });
+
+                // ---------- FORGOT PASSWORD HANDLER ----------
+                const forgotLink = document.getElementById('forgotPasswordLink');
+                if (forgotLink) {
+                    forgotLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        alert('🔐 A password reset link will be sent to your registered email.');
+                    });
+                }
+
+                // ---------- LOGIN FORM SUBMIT ----------
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+
+                        const email = document.getElementById('login-email')?.value;
+                        const password = document.getElementById('login-password')?.value;
+
+                        if (!email || !password) {
+                            alert('Please enter both email and password');
+                            return;
+                        }
+
+                        // Redirect to dashboard after successful login
+                        window.location.href = 'index.html';
+                    });
+                }
+
+                // ---------- SOCIAL LOGIN HANDLER ----------
+                window.socialLogin = function (provider) {
+                    alert(`🔐 ${provider.charAt(0).toUpperCase() + provider.slice(1)} authentication will be integrated.\n\nWelcome to Echelon Search — executive intelligence at your fingertips.`);
+                };
+            })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echelon Search | Insights – Talent Intelligence & Leadership Trends</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23C9A84C' d='M256 32c-14.8 0-26.7 12-26.7 26.7v26.7c0 14.7 11.9 26.7 26.7 26.7s26.7-12 26.7-26.7V58.7c0-14.7-11.9-26.7-26.7-26.7zm117.3 74.7c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zm-234.6 0c-10.4 0-18.8 8.4-18.8 18.8v18.8c0 10.4 8.4 18.8 18.8 18.8s18.8-8.4 18.8-18.8v-18.8c0-10.4-8.4-18.8-18.8-18.8zM256 128c-70.7 0-128 57.3-128 128s57.3 128 128 128 128-57.3 128-128-57.3-128-128-128zm0 213.3c-47.1 0-85.3-38.2-85.3-85.3s38.2-85.3 85.3-85.3 85.3 38.2 85.3 85.3-38.2 85.3-85.3 85.3z'/></svg>">
+    <meta name="description" content="Echelon Insights – executive search intelligence, leadership trends, market reports, and talent strategy.">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'main-bg': 'var(--bg-primary)',
+                        'surface-bg': 'var(--bg-secondary)',
+                        'card-bg': 'var(--card-bg)',
+                        'tertiary-bg': 'var(--bg-tertiary)',
+                        'header-bg': 'var(--bg-header)',
+                        'text-main': 'var(--text-primary)',
+                        'text-sub': 'var(--text-secondary)',
+                        'text-muted': 'var(--text-muted)',
+                        'border-main': 'var(--border-color)',
+                        'gold-accent': 'var(--gold-accent)',
+                        'gold-hover': 'var(--gold-hover)',
+                        'gold-light': 'var(--gold-light)',
+                    },
+                    fontFamily: {
+                        'display': ['Inter', 'system-ui', 'sans-serif'],
+                        'body': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern-light': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                        'grid-pattern-dark': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.9s cubic-bezier(0.2, 0.9, 0.3, 1)',
+                        'pulse-gold': 'pulseGold 2.5s infinite',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        pulseGold: {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '1' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F3F1EC;
+            --bg-header: rgba(250, 249, 246, 0.95);
+            --text-primary: #1C1A17;
+            --text-secondary: #4A453F;
+            --text-muted: #8A8276;
+            --border-color: #EAE6DF;
+            --gold-accent: #B58A3D;
+            --gold-hover: #9E742F;
+            --gold-light: rgba(181, 138, 61, 0.1);
+            --card-bg: #FFFFFF;
+            --card-border: #EAE6DF;
+            --card-shadow: 0 10px 30px rgba(28, 26, 23, 0.04);
+            --nav-item-color: #4A453F;
+        }
+
+        .dark {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1E1E1E;
+            --bg-header: rgba(10, 10, 10, 0.95);
+            --text-primary: #E8E8E8;
+            --text-secondary: #A0A0A0;
+            --text-muted: #6B6B6B;
+            --border-color: #2C2C2C;
+            --gold-accent: #C9A84C;
+            --gold-hover: #D6B95A;
+            --gold-light: rgba(201, 168, 76, 0.1);
+            --card-bg: #121212;
+            --card-border: #2C2C2C;
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            --nav-item-color: #E8E8E8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-accent); border-radius: 8px; }
+
+        /* ---- NAV (exact copy from reference) ---- */
+        .nav-item {
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.82rem;
+            letter-spacing: 0.01em;
+            color: var(--nav-item-color);
+            transition: color 0.2s;
+            padding: 0.5rem 0;
+            opacity: 0.85;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        @media (min-width: 1440px) {
+            .nav-item { font-size: 0.9rem; letter-spacing: 0.02em; }
+        }
+        .nav-item:hover { color: var(--gold-accent); opacity: 1; }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-accent);
+            transition: width 0.25s ease;
+        }
+        .nav-item:hover::after { width: 100%; }
+
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            box-shadow: var(--card-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(6px);
+            transition: all 0.25s ease;
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.65rem 1.5rem;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .dropdown-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--gold-accent);
+            padding-left: 1.75rem;
+        }
+        .dropdown-item i {
+            margin-right: 0.75rem;
+            width: 20px;
+            color: var(--gold-accent);
+            font-size: 0.9rem;
+        }
+
+        .auth-btn {
+            padding: 0.5rem 1.1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            transition: all 0.3s;
+            letter-spacing: 0.2px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        @media (min-width: 1440px) {
+            .auth-btn { padding: 0.5rem 1.6rem; font-size: 0.9rem; letter-spacing: 0.3px; }
+        }
+        .auth-btn.login {
+            background: transparent;
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-accent);
+        }
+        .auth-btn.login:hover {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+        }
+        .auth-btn.signup {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+            border: none;
+        }
+        .auth-btn.signup:hover {
+            background: var(--gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--gold-light);
+        }
+
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+        .toggle-btn:hover {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+            border-color: var(--gold-accent);
+        }
+
+        .mobile-menu {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .mobile-menu.open { max-height: 90vh; overflow-y: auto; }
+        .mobile-menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            font-family: 'Inter', sans-serif;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-weight: 400;
+            text-decoration: none;
+        }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            background: var(--bg-primary);
+        }
+        .mobile-dropdown-content.show { max-height: 250px; }
+        .mobile-auth-btn {
+            padding: 0.8rem;
+            font-weight: 500;
+            border-radius: 6px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        .mobile-auth-btn.login {
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-accent);
+        }
+        .mobile-auth-btn.signup {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+        }
+
+        /* ---- insights cards ---- */
+        .insight-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            transition: all 0.3s;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .insight-card:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(181, 138, 61, 0.1);
+        }
+        .insight-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: var(--gold-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-accent);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        .insight-card:hover .insight-icon {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: var(--gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--gold-light);
+        }
+        .btn-outline {
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-accent);
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s;
+            background: transparent;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+        }
+
+        .footer-heading {
+            border-left: 3px solid var(--gold-accent);
+            padding-left: 0.75rem;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.3s;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background: var(--gold-accent);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+        }
+
+        [dir="rtl"] .dropdown-menu { left: auto; right: 0; }
+        [dir="rtl"] .dropdown-item i { margin-right: 0; margin-left: 0.75rem; }
+        [dir="rtl"] .footer-heading { border-left: none; border-right: 3px solid #C9A84C; padding-left: 0; padding-right: 0.75rem; }
+        [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+        [dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+        [dir="rtl"] .ml-8 { margin-left: 0; margin-right: 2rem; }
+        [dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--gold-light);
+            color: var(--gold-accent);
+            border: 1px solid var(--gold-accent);
+        }
+        .featured-article {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+            box-shadow: var(--card-shadow);
+        }
+        .featured-article:hover {
+            border-color: var(--gold-accent);
+            transform: scale(1.01);
+        }
+    </style>
+</head>
+<body class="bg-main-bg text-text-main transition-colors duration-300">
+
+<!-- ========== HEADER (exact copy from reference) ========== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-header-bg backdrop-blur-sm border-b border-border-main transition-colors duration-300">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-20">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300">
+                    <i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-display font-extrabold tracking-tight text-text-main transition-colors duration-300">Echelon</span>
+                    <span class="text-gold-accent font-display font-light ml-1 text-sm transition-colors duration-300">Search</span>
+                </div>
+            </a>
+
+            <div class="hidden xl:flex items-center">
+                <div class="flex items-center gap-4 xl:gap-5 2xl:gap-7">
+                    <div class="dropdown">
+                        <button class="nav-item flex items-center gap-1">Home <i class="fas fa-chevron-down text-[9px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-item">About</a>
+                    <a href="service.html" class="nav-item">Services</a>
+                    <a href="practices.html" class="nav-item">Practices</a>
+                    <a href="candidate.html" class="nav-item">Candidates</a>
+                    <a href="insights.html" class="nav-item">Insights</a>
+                    <a href="contact.html" class="nav-item">Contact</a>
+                    <div class="dropdown">
+                        <button class="nav-item flex items-center gap-1">Dashboard <i class="fas fa-chevron-down text-[9px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="client.html" class="dropdown-item">Client</a>
+                            <a href="admin.html" class="dropdown-item">Admin</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 ml-4 2xl:ml-8">
+                    <a href="login.html" class="auth-btn login">Log In</a>
+                    <a href="signup.html" class="auth-btn signup">Sign up</a>
+                </div>
+                <div class="flex gap-2 ml-3 2xl:ml-4 desktop-toggle-group">
+                    <button id="theme-toggle" class="toggle-btn" title="Theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                    <button id="rtl-toggle" class="toggle-btn" title="RTL">⇄</button>
+                </div>
+            </div>
+
+            <button id="mobile-toggle" class="xl:hidden text-text-main p-2 text-2xl bg-transparent border-none cursor-pointer transition-colors duration-300">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu xl:hidden">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item bg-transparent border-none cursor-pointer text-left">
+                    Home <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="mobile-dropdown-content">
+                    <a href="index.html" class="block px-8 py-2 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">Home 1</a>
+                    <a href="home2.html" class="block px-8 py-2 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="mobile-menu-item">About</a>
+            <a href="service.html" class="mobile-menu-item">Services</a>
+            <a href="practices.html" class="mobile-menu-item">Practices</a>
+            <a href="candidate.html" class="mobile-menu-item">Candidates</a>
+            <a href="insights.html" class="mobile-menu-item">Insights</a>
+            <a href="contact.html" class="mobile-menu-item">Contact</a>
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between w-full mobile-menu-item bg-transparent border-none cursor-pointer text-left">
+                    Dashboard <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="mobile-dropdown-content">
+                    <a href="client.html" class="block px-8 py-3 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">Client</a>
+                    <a href="admin.html" class="block px-8 py-3 text-sm hover:bg-tertiary-bg text-text-sub transition-colors duration-200">Admin</a>
+                </div>
+            </div>
+            <div class="flex flex-col gap-3 p-6">
+                <a href="login.html" class="mobile-auth-btn login">Log In</a>
+                <a href="signup.html" class="mobile-auth-btn signup">Sign up</a>
+            </div>
+            <div class="flex justify-center gap-3 p-6 border-t border-border-main">
+                <button id="theme-toggle-mobile" class="toggle-btn"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <button id="rtl-toggle-mobile" class="toggle-btn">⇄</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== INSIGHTS HERO (unique design) ========== -->
+<section class="relative pt-40 pb-24 lg:pt-48 lg:pb-36 bg-main-bg overflow-hidden transition-colors duration-300">
+    <div class="absolute inset-0 bg-grid-pattern-light dark:bg-grid-pattern-dark opacity-60 pointer-events-none"></div>
+    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-gold-accent/15 to-transparent blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-[-200px] w-[700px] h-[700px] rounded-full bg-gradient-to-tl from-gold-accent/10 to-transparent blur-[130px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-3 bg-gold-light px-5 py-2 rounded-full border border-gold-accent/30 mb-6">
+                <i class="fas fa-lightbulb text-gold-accent text-sm"></i>
+                <span class="text-gold-accent font-mono text-xs font-semibold tracking-widest uppercase">Talent Intelligence Hub</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold text-text-main leading-tight animate-fade-up">
+                Leadership <span class="text-gold-accent">Insights</span> & Trends
+            </h1>
+            <p class="text-lg md:text-xl text-text-sub max-w-3xl mx-auto mt-6 font-light leading-relaxed">
+                Data-driven intelligence, market reports, and strategic perspectives for executive decision-making.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <button class="btn-primary text-base px-8 py-3.5 flex items-center gap-2 group">
+                    <span>Explore insights</span>
+                    <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                </button>
+                <button class="btn-outline text-base px-8 py-3.5 flex items-center gap-2">
+                    <i class="fas fa-bell text-gold-accent"></i>
+                    <span>Subscribe</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FEATURED INSIGHT (highlight) ========== -->
+<section class="py-16 bg-surface-bg border-y border-border-main transition-colors duration-300">
+    <div class="container mx-auto px-6 max-w-5xl">
+        <div class="featured-article">
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <div class="lg:w-2/3">
+                    <span class="category-badge">Featured Report</span>
+                    <h2 class="text-2xl md:text-3xl font-display font-bold text-text-main mt-3">2026 CEO Succession Index</h2>
+                    <p class="text-text-sub text-sm mt-2 font-light">Analysis of turnover, diversity, and emerging talent in Fortune 500 boards. This comprehensive report covers succession planning trends, board composition shifts, and the rising demand for digital-native leaders.</p>
+                    <div class="flex items-center gap-4 mt-4 text-xs text-text-muted">
+                        <span><i class="far fa-calendar-alt text-gold-accent mr-1"></i> June 2026</span>
+                        <span><i class="far fa-clock text-gold-accent mr-1"></i> 12 min read</span>
+                    </div>
+                    <button class="btn-primary text-sm mt-5 px-6 py-2.5">Read full report →</button>
+                </div>
+                <div class="lg:w-1/3 bg-gold-light/30 rounded-2xl p-6 border border-gold-accent/20 text-center">
+                    <div class="text-4xl font-display font-extrabold text-gold-accent">94%</div>
+                    <p class="text-text-sub text-sm mt-1">Board confidence in CEO succession plans</p>
+                    <div class="w-full h-1 bg-border-main rounded-full mt-4"><div class="h-full w-[94%] bg-gold-accent rounded-full"></div></div>
+                    <div class="text-xs text-text-muted mt-2">↑ 8% YoY improvement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== INSIGHT CATEGORIES ========== -->
+<section class="py-20 bg-main-bg transition-colors duration-300">
+    <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-gold-accent font-display text-xs tracking-widest uppercase">Knowledge areas</span>
+            <h2 class="text-4xl font-display font-bold text-text-main mt-2">Explore Our <span class="text-gold-accent">Intelligence</span></h2>
+            <p class="text-text-sub mt-4">Curated insights across executive search, leadership, and talent strategy.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="insight-card">
+                <div class="insight-icon mb-4"><i class="fas fa-chart-line"></i></div>
+                <h3 class="text-xl font-display font-bold text-text-main">Market Reports</h3>
+                <p class="text-text-sub text-sm mt-2 font-light">Sector-specific talent supply, compensation benchmarks, and hiring trends.</p>
+                <a href="#" class="inline-flex items-center gap-2 text-gold-accent text-sm font-medium mt-auto pt-4 hover:text-gold-hover transition">
+                    View reports <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-icon mb-4"><i class="fas fa-people-arrows"></i></div>
+                <h3 class="text-xl font-display font-bold text-text-main">Succession Strategy</h3>
+                <p class="text-text-sub text-sm mt-2 font-light">Board readiness, C-suite continuity, and leadership pipeline development.</p>
+                <a href="#" class="inline-flex items-center gap-2 text-gold-accent text-sm font-medium mt-auto pt-4 hover:text-gold-hover transition">
+                    Read more <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-icon mb-4"><i class="fas fa-brain"></i></div>
+                <h3 class="text-xl font-display font-bold text-text-main">Future of Work</h3>
+                <p class="text-text-sub text-sm mt-2 font-light">AI in executive search, remote leadership, and evolving workforce dynamics.</p>
+                <a href="#" class="inline-flex items-center gap-2 text-gold-accent text-sm font-medium mt-auto pt-4 hover:text-gold-hover transition">
+                    Explore <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ARTICLE GRID ========== -->
+<section class="py-20 bg-surface-bg border-y border-border-main transition-colors duration-300">
+    <div class="container mx-auto px-6 max-w-6xl">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+            <div>
+                <span class="text-gold-accent font-display text-xs tracking-widest uppercase">Latest articles</span>
+                <h2 class="text-3xl font-display font-bold text-text-main mt-1">Recent <span class="text-gold-accent">Insights</span></h2>
+            </div>
+            <button class="btn-outline text-sm mt-4 md:mt-0">View all articles →</button>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Article 1 -->
+            <div class="bg-card-bg border border-border-main rounded-2xl overflow-hidden hover:border-gold-accent/40 transition-all group flex flex-col h-full">
+                <div class="p-6 flex flex-col h-full flex-grow">
+                    <span class="category-badge text-[10px]">Diversity</span>
+                    <h3 class="text-lg font-display font-bold text-text-main mt-3 group-hover:text-gold-accent transition-colors">Building Diverse Boards: A Roadmap</h3>
+                    <p class="text-text-sub text-sm mt-2 font-light">Strategies for increasing representation and cognitive diversity in the boardroom.</p>
+                    <div class="flex items-center justify-between mt-auto pt-4">
+                        <span class="text-xs text-text-muted"><i class="far fa-calendar-alt mr-1"></i> May 2026</span>
+                        <a href="#" class="text-gold-accent text-sm font-medium hover:text-gold-hover transition">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="bg-card-bg border border-border-main rounded-2xl overflow-hidden hover:border-gold-accent/40 transition-all group flex flex-col h-full">
+                <div class="p-6 flex flex-col h-full flex-grow">
+                    <span class="category-badge text-[10px]">Technology</span>
+                    <h3 class="text-lg font-display font-bold text-text-main mt-3 group-hover:text-gold-accent transition-colors">AI in Executive Search: 2026 Outlook</h3>
+                    <p class="text-text-sub text-sm mt-2 font-light">How machine learning and predictive analytics are reshaping talent acquisition.</p>
+                    <div class="flex items-center justify-between mt-auto pt-4">
+                        <span class="text-xs text-text-muted"><i class="far fa-calendar-alt mr-1"></i> April 2026</span>
+                        <a href="#" class="text-gold-accent text-sm font-medium hover:text-gold-hover transition">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="bg-card-bg border border-border-main rounded-2xl overflow-hidden hover:border-gold-accent/40 transition-all group flex flex-col h-full">
+                <div class="p-6 flex flex-col h-full flex-grow">
+                    <span class="category-badge text-[10px]">Leadership</span>
+                    <h3 class="text-lg font-display font-bold text-text-main mt-3 group-hover:text-gold-accent transition-colors">The Hybrid CEO: Leading in a Distributed World</h3>
+                    <p class="text-text-sub text-sm mt-2 font-light">Navigating culture, trust, and performance in hybrid and remote-first organizations.</p>
+                    <div class="flex items-center justify-between mt-auto pt-4">
+                        <span class="text-xs text-text-muted"><i class="far fa-calendar-alt mr-1"></i> March 2026</span>
+                        <a href="#" class="text-gold-accent text-sm font-medium hover:text-gold-hover transition">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 4 -->
+            <div class="bg-card-bg border border-border-main rounded-2xl overflow-hidden hover:border-gold-accent/40 transition-all group flex flex-col h-full">
+                <div class="p-6 flex flex-col h-full flex-grow">
+                    <span class="category-badge text-[10px]">Private Equity</span>
+                    <h3 class="text-lg font-display font-bold text-text-main mt-3 group-hover:text-gold-accent transition-colors">PE Talent Radar: 2026 Edition</h3>
+                    <p class="text-text-sub text-sm mt-2 font-light">Mapping operating partner and portfolio CXO supply across key sectors.</p>
+                    <div class="flex items-center justify-between mt-auto pt-4">
+                        <span class="text-xs text-text-muted"><i class="far fa-calendar-alt mr-1"></i> February 2026</span>
+                        <a href="#" class="text-gold-accent text-sm font-medium hover:text-gold-hover transition">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 5 -->
+            <div class="bg-card-bg border border-border-main rounded-2xl overflow-hidden hover:border-gold-accent/40 transition-all group flex flex-col h-full">
+                <div class="p-6 flex flex-col h-full flex-grow">
+                    <span class="category-badge text-[10px]">Healthcare</span>
+                    <h3 class="text-lg font-display font-bold text-text-main mt-3 group-hover:text-gold-accent transition-colors">Biotech Leadership: The Talent Imperative</h3>
+                    <p class="text-text-sub text-sm mt-2 font-light">Addressing the shortage of commercial and regulatory leaders in life sciences.</p>
+                    <div class="flex items-center justify-between mt-auto pt-4">
+                        <span class="text-xs text-text-muted"><i class="far fa-calendar-alt mr-1"></i> January 2026</span>
+                        <a href="#" class="text-gold-accent text-sm font-medium hover:text-gold-hover transition">Read →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article 6 -->
+            <div class="bg-card-bg border border-border-main rounded-2xl overflow-hidden hover:border-gold-accent/40 transition-all group flex flex-col h-full">
+                <div class="p-6 flex flex-col h-full flex-grow">
+                    <span class="category-badge text-[10px]">Strategy</span>
+                    <h3 class="text-lg font-display font-bold text-text-main mt-3 group-hover:text-gold-accent transition-colors">Succession Planning in Family Offices</h3>
+                    <p class="text-text-sub text-sm mt-2 font-light">Ensuring continuity and governance in multi-generational family enterprises.</p>
+                    <div class="flex items-center justify-between mt-auto pt-4">
+                        <span class="text-xs text-text-muted"><i class="far fa-calendar-alt mr-1"></i> December 2025</span>
+                        <a href="#" class="text-gold-accent text-sm font-medium hover:text-gold-hover transition">Read →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SUBSCRIBE / CTA ========== -->
+<section class="py-16 bg-gold-accent text-white transition-colors duration-300 relative">
+    <div class="container mx-auto px-6 text-center max-w-4xl">
+        <h2 class="text-3xl md:text-4xl font-display font-extrabold tracking-tight dark:text-main-bg transition-colors duration-300">
+            Stay ahead of the curve
+        </h2>
+        <p class="text-base md:text-lg mt-3 font-light leading-relaxed max-w-2xl mx-auto opacity-90 dark:text-main-bg transition-colors duration-300">
+            Subscribe to receive our latest intelligence reports, market briefings, and leadership insights.
+        </p>
+        <form class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+            <input type="email" placeholder="Your email address" class="bg-white text-gray-950 placeholder-gray-400 rounded-full px-6 py-3.5 w-full sm:w-80 md:w-96 focus:outline-none focus:ring-2 focus:ring-white/50 shadow-sm transition-all text-center sm:text-left" required>
+            <button type="submit" class="bg-white hover:bg-gray-100 text-gold-accent dark:bg-main-bg dark:text-gold-accent dark:hover:bg-opacity-95 font-semibold rounded-full px-8 py-3.5 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-white/50 whitespace-nowrap">
+                Subscribe
+            </button>
+        </form>
+        <p class="text-xs mt-4 opacity-70 dark:text-main-bg transition-colors duration-300">No spam. Unsubscribe anytime.</p>
+    </div>
+</section>
+
+<!-- ========== FOOTER (exact copy from reference) ========== -->
+<footer class="pt-16 pb-8 bg-main-bg border-t border-border-main transition-colors duration-300">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="text-center md:text-left">
+                <div class="flex items-center gap-3 mb-6 justify-center md:justify-start">
+                    <div class="w-10 h-10 bg-gold-accent flex items-center justify-center rounded-lg transition-colors duration-300"><i class="fas fa-bolt text-main-bg text-xl transition-colors duration-300"></i></div>
+                    <span class="text-2xl font-display font-extrabold text-text-main transition-colors duration-300">Echelon</span><span class="text-gold-accent font-display text-sm transition-colors duration-300">Search</span>
+                </div>
+                <p class="text-text-sub/70 font-light leading-relaxed max-w-xs mx-auto md:mx-0">Global executive search · Leadership advisory since 2002.</p>
+                <div class="flex gap-3 mt-6 justify-center md:justify-start">
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="text-center md:text-left">
+                <h3 class="text-text-main text-xl font-display font-bold mb-5 footer-heading">Practices</h3>
+                <ul class="space-y-3 font-light text-text-sub/80">
+                    <li><a href="practices.html" class="hover:text-gold-accent transition block">C-Suite & Board</a></li>
+                    <li><a href="practices.html" class="hover:text-gold-accent transition block">Tech & Digital</a></li>
+                    <li><a href="practices.html" class="hover:text-gold-accent transition block">Healthcare & Life Sci</a></li>
+                    <li><a href="practices.html" class="hover:text-gold-accent transition block">Private Equity</a></li>
+                </ul>
+            </div>
+            <div class="text-center md:text-left">
+                <h3 class="text-text-main text-xl font-display font-bold mb-5 footer-heading">Insights</h3>
+                <ul class="space-y-3 font-light text-text-sub/80">
+                    <li><a href="insights.html" class="hover:text-gold-accent transition block">Talent Intelligence</a></li>
+                    <li><a href="insights.html" class="hover:text-gold-accent transition block">Market Reports</a></li>
+                    <li><a href="insights.html" class="hover:text-gold-accent transition block">Diversity & Inclusion</a></li>
+                    <li><a href="insights.html" class="hover:text-gold-accent transition block">Webinars</a></li>
+                </ul>
+            </div>
+            <div class="text-center md:text-left">
+                <h3 class="text-text-main text-xl font-display font-bold mb-5 footer-heading">Connect</h3>
+                <ul class="space-y-3 font-light text-text-sub/80">
+                    <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-map-marker-alt text-gold-accent w-5"></i><span>1 Embarcadero, SF, CA</span></li>
+                    <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-phone text-gold-accent w-5"></i><span>+1 (888) 567-2002</span></li>
+                    <li class="flex items-center justify-center md:justify-start gap-3"><i class="fas fa-envelope text-gold-accent w-5"></i><span>secure@echelon.com</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-border-main mt-12 pt-8 text-center text-text-muted text-sm font-light">
+            <p>© 2026 Echelon Search. Confidential & Secure. All rights reserved.</p>
+            <p class="mt-1">Certified by the Association of Executive Search Consultants</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== SCRIPTS (same as reference) ========== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+
+        function updateThemeUI(isDark) {
+            [themeBtn, themeBtnMob].forEach(function(b) {
+                if (b) {
+                    var moon = b.querySelector('.fa-moon');
+                    var sun = b.querySelector('.fa-sun');
+                    if (moon && sun) {
+                        if (isDark) { moon.classList.add('hidden'); sun.classList.remove('hidden'); }
+                        else { moon.classList.remove('hidden'); sun.classList.add('hidden'); }
+                    }
+                }
+            });
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            var isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI(isDark);
+        }
+
+        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+        if (themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+
+        var cachedTheme = localStorage.getItem('theme');
+        var isDark = cachedTheme === 'dark' || cachedTheme === null;
+        if (isDark) { document.documentElement.classList.add('dark'); updateThemeUI(true); }
+        else { document.documentElement.classList.remove('dark'); updateThemeUI(false); }
+
+        const rtlBtn = document.getElementById('rtl-toggle');
+        const rtlMob = document.getElementById('rtl-toggle-mobile');
+
+        function updateRtlUI(isRtl) {
+            document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+            document.documentElement.lang = isRtl ? 'ar' : 'en';
+            [rtlBtn, rtlMob].forEach(b => { if (b) b.classList.toggle('active', isRtl); });
+        }
+
+        function toggleRtl() {
+            var isRtl = document.documentElement.dir !== 'rtl';
+            localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr');
+            updateRtlUI(isRtl);
+        }
+
+        if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+        if (rtlMob) rtlMob.addEventListener('click', toggleRtl);
+        if (localStorage.getItem('dir') === 'rtl') updateRtlUI(true);
+
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = mobileToggle ? mobileToggle.querySelector('i') : null;
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('open');
+                if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+                document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+            });
+        }
+
+        
+        // Active Navigation Highlighting
+        (function() {
+            var style = document.createElement('style');
+            style.textContent = `
+                .nav-item.active {
+                    color: var(--gold-accent) !important;
+                    opacity: 1 !important;
+                }
+                .nav-item.active::after {
+                    width: 100% !important;
+                }
+                .mobile-menu-item.active {
+                    color: var(--gold-accent) !important;
+                    font-weight: 600 !important;
+                }
+                .mobile-dropdown-btn.active {
+                    color: var(--gold-accent) !important;
+                }
+                .dropdown-item.active {
+                    background: var(--bg-tertiary) !important;
+                    color: var(--gold-accent) !important;
+                }
+            `;
+            document.head.appendChild(style);
+
+            var pathname = window.location.pathname.split('/').pop() || 'index.html';
+
+            // 1. Desktop primary links
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                }
+            });
+
+            // 2. Desktop dropdown sub-links
+            document.querySelectorAll('.dropdown-menu .dropdown-item').forEach(function(item) {
+                // Reset any hardcoded inline active styles from copy-pastes
+                item.style.background = '';
+                item.style.color = '';
+                
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                    var parentDropdown = item.closest('.dropdown');
+                    if (parentDropdown) {
+                        var btn = parentDropdown.querySelector('.nav-item');
+                        if (btn) btn.classList.add('active');
+                    }
+                }
+            });
+
+            // 3. Mobile primary links
+            document.querySelectorAll('.mobile-menu-item').forEach(function(item) {
+                // Reset hardcoded inline active styles
+                item.style.color = '';
+                
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                }
+            });
+
+            // 4. Mobile dropdown sub-links
+            document.querySelectorAll('.mobile-dropdown-content a').forEach(function(item) {
+                var href = item.getAttribute('href');
+                if (href === pathname) {
+                    item.classList.add('active');
+                    var parentDropdown = item.closest('.mobile-dropdown');
+                    if (parentDropdown) {
+                        var btn = parentDropdown.querySelector('.mobile-dropdown-btn');
+                        if (btn) btn.classList.add('active');
+                    }
+                }
+            });
+        })();
+
+        document.querySelectorAll('.mobile-dropdown-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                var content = btn.nextElementSibling;
+                if (content) {
+                    content.classList.toggle('show');
+                    var icon = btn.querySelector('.fa-chevron-down');
+                    if (icon) { icon.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)'; }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
