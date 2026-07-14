@@ -496,6 +496,21 @@
             margin-left: 0;
             margin-right: 1rem;
         }
+    
+        /* Premium dark hero text */
+        .hero-section .text-text-main { color: #ffffff !important; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .hero-section .text-text-sub { color: rgba(255,255,255,0.95) !important; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    
+        /* Fix stat cards inside hero section */
+        .hero-section .stat-card .text-text-sub, .hero-section .stat-card .text-text-main { color: var(--text-muted) !important; text-shadow: none !important; }
+    
+        .hero-section .text-text-muted { color: rgba(255,255,255,0.8) !important; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    
+        .hero-section .bg-gold-light { background-color: rgba(0, 0, 0, 0.4) !important; backdrop-filter: blur(8px) !important; border-color: rgba(201, 168, 76, 0.5) !important; text-shadow: none !important; }
+    
+        .hero-section .btn-outline { color: #ffffff !important; border-color: rgba(255, 255, 255, 0.8) !important; background-color: rgba(255, 255, 255, 0.1) !important; backdrop-filter: blur(8px) !important; }
+        .hero-section .btn-outline:hover { background-color: rgba(255, 255, 255, 0.25) !important; border-color: #ffffff !important; color: #ffffff !important; }
+        .hero-section .btn-outline:hover i { color: #ffffff !important; }
     </style>
 </head>
 <body class="bg-main-bg text-text-main transition-colors duration-300">
@@ -600,8 +615,8 @@
 </nav>
 
 <!-- ========== HERO SECTION ========== -->
-<section class="relative pt-40 pb-24 lg:pt-48 lg:pb-36 overflow-hidden transition-colors duration-300" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-white/85 dark:bg-black/80 pointer-events-none"></div>
+<section class="hero-section relative pt-40 pb-24 lg:pt-48 lg:pb-36 overflow-hidden transition-colors duration-300" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/45 dark:bg-black/60 pointer-events-none"></div>
     <!-- Grid backgrounds -->
     <div class="absolute inset-0 bg-grid-pattern-light dark:bg-grid-pattern-dark opacity-40 pointer-events-none"></div>
     
@@ -1143,6 +1158,14 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 
 
