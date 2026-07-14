@@ -400,8 +400,9 @@
 </nav>
 
 <!-- ========== HOME 2 HERO – DIFFERENT LAYOUT ========== -->
-<section class="relative pt-40 pb-20 lg:pt-48 lg:pb-28 bg-main-bg overflow-hidden transition-colors duration-300">
+<section class="relative pt-40 pb-20 lg:pt-48 lg:pb-28 bg-main-bg overflow-hidden transition-colors duration-300" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-blend-mode: overlay;">
   <!-- decorative grid + glow -->
+  <div class="absolute inset-0 bg-main-bg/90 pointer-events-none"></div>
   <div class="absolute inset-0 bg-grid-pattern-light dark:bg-grid-pattern-dark opacity-50 pointer-events-none"></div>
   <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-gold-accent/10 rounded-full blur-[140px] pointer-events-none"></div>
   <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gold-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -436,31 +437,11 @@
         </div>
       </div>
 
-      <!-- right: circular dashboard / visual (different from reference) -->
+      <!-- right: Hero Image -->
       <div class="lg:col-span-5 relative flex justify-center lg:justify-center animate-fade-up">
-        <div class="relative w-full max-w-[420px] aspect-square">
-          <!-- outer ring -->
-          <div class="absolute inset-0 rounded-full border-[3px] border-gold-accent/30 animate-spin-slow"></div>
-          <div class="absolute inset-[12%] rounded-full border-[2px] border-border-main bg-surface-bg/40 backdrop-blur-sm shadow-xl flex flex-col items-center justify-center p-6">
-            <div class="text-center">
-              <span class="text-5xl font-display font-black text-gold-accent">94%</span>
-              <p class="text-text-sub text-sm font-medium tracking-wide">placement success</p>
-              <div class="w-16 h-1 bg-gold-accent/30 mx-auto my-3 rounded-full"></div>
-              <div class="flex justify-center gap-6 text-xs font-mono text-text-muted">
-                <div><span class="block text-gold-accent font-bold">312</span> placed</div>
-                <div><span class="block text-gold-accent font-bold">1.2k</span> screened</div>
-              </div>
-            </div>
-          </div>
-          <!-- floating badges around ring -->
-          <div class="absolute -top-4 -right-4 bg-card-bg border border-border-main rounded-xl px-4 py-2 shadow-lg flex items-center gap-2">
-            <i class="fas fa-user-tie text-gold-accent"></i>
-            <span class="text-xs font-semibold">C-Suite</span>
-          </div>
-          <div class="absolute -bottom-4 -left-4 bg-card-bg border border-border-main rounded-xl px-4 py-2 shadow-lg flex items-center gap-2">
-            <i class="fas fa-rocket text-gold-accent"></i>
-            <span class="text-xs font-semibold">scale-up</span>
-          </div>
+        <div class="relative w-full max-w-[600px] rounded-2xl overflow-hidden shadow-2xl border border-border-main">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop" alt="C-Suite Executive Meeting" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-tr from-main-bg/30 to-transparent mix-blend-overlay"></div>
         </div>
       </div>
     </div>
